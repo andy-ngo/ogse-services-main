@@ -1,0 +1,281 @@
+{
+    "model": {
+        "id": 4,
+        "message_type": null,
+        "metadata": {
+            "name": "Alternate Bit Protocol",
+            "type": "top",
+            "formalism": "DEVS",
+            "simulator": "Cadmium",
+            "description": "This is a network model using the alternating bit protocol with a network of two subnets.",
+            "date_created": "2021-01-05",
+            "author": 0,
+            "tags": ["network", "simple", "abp"]
+        },
+        "ports": [{
+                "name": "inp_control",
+                "type": "input",
+                "message_type": 1,
+                "couplings": [["Sender", "controlIn"]]
+            }, {
+                "name": "outp_ack",
+                "type": "output",
+                "message_type": 1,
+                "couplings": [["Sender", "ackReceivedOut"]]
+            }, {
+                "name": "outp_pack",
+                "type": "output",
+                "message_type": 1,
+                "couplings": [["Sender", "packetSentOut"]]
+            }
+        ],
+        "submodels": [{
+                "id": "Sender",
+                "model_type": 0
+            }, {
+                "id": "Network",
+                "model_type": 3
+            }, {
+                "id": "Receiver",
+                "model_type": 1
+            }
+        ],
+        "internal_couplings": [{
+                "from": ["Sender", "dataOut"],
+                "to": ["Network", "inp_1"]
+            }, {
+                "from": ["Network", "outp_2"],
+                "to": ["Sender", "ackIn"]
+            }, {
+                "from": ["Receiver", "out_port"],
+                "to": ["Network", "inp_2"]
+            }, {
+                "from": ["Network", "outp_1"],
+                "to": ["Receiver", "in_port"]
+            }
+        ],
+    },
+    "model_types": [{
+            "id": 0,
+            "message_type": 0,
+            "metadata": {
+                "name": "sender",
+                "type": "atomic",
+                "formalism": "DEVS",
+                "simulator": "Cadmium",
+                "description": "This is a network component that periodically generates packets of data to send through the network.",
+                "date_created": "2021-01-05",
+                "author": 0,
+                "tags": ["network", "simple"]
+            },
+            "ports": [{
+                    "name": "controlIn",
+                    "type": "input",
+                    "message_type": 1
+                }, {
+                    "name": "ackIn",
+                    "type": "input",
+                    "message_type": 1
+                }, {
+                    "name": "packetSentOut",
+                    "type": "output",
+                    "message_type": 1
+                }, {
+                    "name": "ackReceivedOut",
+                    "type": "output",
+                    "message_type": 1
+                }, {
+                    "name": "dataOut",
+                    "type": "output",
+                    "message_type": 1
+                }
+            ]
+        }, {
+            "id": 1,
+            "message_type": 2,
+            "metadata": {
+                "name": "receiver",
+                "type": "atomic",
+                "formalism": "DEVS",
+                "simulator": "Cadmium",
+                "description": "This is a network component that receives packets of data.",
+                "date_created": "2021-01-05",
+                "author": 0,
+                "tags": ["network", "simple"]
+            },
+            "ports": [{
+                    "name": "in_port",
+                    "type": "input",
+                    "message_type": 1
+                }, {
+                    "name": "out_port",
+                    "type": "output",
+                    "message_type": 1
+                }
+            ]
+        }, {
+            "id": 2,
+            "message_type": 2,
+            "metadata": {
+                "name": "subnet",
+                "type": "atomic",
+                "formalism": "DEVS",
+                "simulator": "Cadmium",
+                "description": "This is a network component through which packets of data transit.",
+                "date_created": "2021-01-05",
+                "author": 1,
+                "tags": ["network", "simple"]
+            },
+            "ports": [{
+                    "name": "in",
+                    "type": "input",
+                    "message_type": 1
+                }, {
+                    "name": "out",
+                    "type": "output",
+                    "message_type": 1
+                }
+            ]
+        }, {
+            "id": 3,
+            "message_type": null,
+            "metadata": {
+                "name": "network",
+                "type": "coupled",
+                "formalism": "DEVS",
+                "simulator": "Cadmium",
+                "description": "This is a network component that contains two subnets.",
+                "date_created": "2021-01-05",
+                "author": 3,
+                "tags": ["network", "simple"]
+            },
+            "ports": [{
+                    "name": "inp_1",
+                    "type": "input",
+                    "message_type": 1,
+                    "couplings": [["subnet1", "in"]]
+                }, {
+                    "name": "inp_2",
+                    "type": "input",
+                    "message_type": 1,
+                    "couplings": [["subnet2", "in"]]
+                }, {
+                    "name": "outp_1",
+                    "type": "output",
+                    "message_type": 1,
+                    "couplings": [["subnet1", "out"]]
+                }, {
+                    "name": "outp_2",
+                    "type": "output",
+                    "message_type": 1,
+                    "couplings": [["subnet2", "out"]]
+                }
+            ],
+            "submodels": [{
+                    "id": "subnet1",
+                    "model_type": 1,
+                }, {
+                    "id": "subnet2",
+                    "model_type": 1
+                }
+            ],
+            "internal_couplings": []
+        }
+    ],
+    "message_types": [{
+            "id": 0,
+            "template": "{\"packetNum\":0, \"totalPacketNum\":0}",
+            "description": "The state of the sender. packetNum is *something*. totalPacketNum is *something else*."
+        }, {
+            "id": 1,
+            "template": "{\"value\":0}",
+            "description": "The value associated to a packet."
+        }, {
+            "id": 2,
+            "template": "{\"ackNum: \":0}",
+            "description": "The state of the receiver. ackNum is *something*."
+        }, {
+            "id": 3,
+            "template": "{\"index: \":0,\"transmitting: \":0}",
+            "description": "The state of the subnet. index is *something*. transmitting indicates whether the subnet is transmitting (1) or not (0)."
+        }
+    ],
+    "source_files": [{
+            "id": 0,
+            "name": "main.cpp",
+            "type": 3,
+            "last_modification": "2021-04-05",
+            "last_author": 0,
+            "path": "top_model/"
+        }, {
+            "id": 1,
+            "name": "sender.hpp",
+            "type": 0,
+            "last_modification": "2021-04-05",
+            "last_author": 3,
+            "path": "atomics/"
+        }, {
+            "id": 2,
+            "name": "receiver.hpp",
+            "type": 0,
+            "last_modification": "2021-04-05",
+            "last_author": 3,
+            "path": "atomics/"
+        }, {
+            "id": 3,
+            "name": "subnet.hpp",
+            "type": 0,
+            "last_modification": "2021-04-05",
+            "last_author": 2,
+            "path": "atomics/"
+        }, {
+            "id": 4,
+            "name": "message.hpp",
+            "type": 2,
+            "last_modification": "2021-04-05",
+            "last_author": 1,
+            "path": "data_structures/"
+        }, {
+            "id": 5,
+            "name": "message.cpp",
+            "type": 3,
+            "last_modification": "2021-04-05",
+            "last_author": 1,
+            "path": "data_structures/"
+        }
+    ],
+    "authors": [{
+            "id": 0,
+            "first_name": "Bruno",
+            "last_name": "St-Aubin",
+            "middle_name": null,
+            "email": "staubin.bruno@gmail.com",
+            "affiliation": "ARSLab - Carleton University",
+            "creation_date": "2020-02-04"
+        }, {
+            "id": 1,
+            "first_name": "Hamza",
+            "last_name": "Qassoud",
+            "middle_name": null,
+            "email": "hamza.qassoud@gmail.com",
+            "affiliation": "ARSLab - Carleton University",
+            "creation_date": "2021-02-14"
+        }, {
+            "id": 2,
+            "first_name": "Prakhar",
+            "last_name": "Shukla",
+            "middle_name": null,
+            "email": "prakhar3109@gmail.com",
+            "affiliation": "ARSLab - Carleton University",
+            "creation_date": "2021-05-12"
+        }, {
+            "id": 3,
+            "first_name": "Tao",
+            "last_name": "Zheng",
+            "middle_name": null,
+            "email": null,
+            "affiliation": "ARSLab - Carleton University",
+            "creation_date": "2020-01-25"
+        }
+    ]
+}

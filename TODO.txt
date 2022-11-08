@@ -1,0 +1,5 @@
+Better error handling for external processes
+Review inputs for different controller, use JSON objects where possible
+Review Visualization publish, very similar functions
+When service fails, clean all scratch folders.
+Visualziation, create entity and folder first.

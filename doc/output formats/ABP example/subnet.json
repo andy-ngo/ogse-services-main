@@ -1,0 +1,56 @@
+{
+    "id": 2,
+	"message_type": 2,
+    "metadata": {
+        "name": "subnet",
+		"type" : "atomic",
+        "formalism": "DEVS",
+        "simulator": "Cadmium",
+        "description": "This is a network component through which packets of data transit.",
+        "date_created": "2021-01-05",
+        "author": 1,
+        "tags": ["network", "simple"]
+    },
+    "ports": [{
+            "name": "in",
+            "type": "input",
+			"message_type": 1
+        }, {
+            "name": "out",
+            "type": "output",
+			"message_type": 1
+        }
+    ],
+	"message_types": [{
+		"id": 1,
+		"template" : "{\"value\":0}",
+		"description" : "The value associated to a packet."
+	},{
+		"id": 3,
+		"template" : "{\"index: \":0,\"transmitting: \":0}",
+		"description" : "The state of the subnet. index is *something*. transmitting indicates whether the subnet is transmitting (1) or not (0)."
+	}],
+    "source_files": [{
+			"id": 4,
+            "name": "subnet.hpp",
+            "type": 0,
+            "last_modification": "2021-04-05",
+            "last_author": 2,
+            "path": "atomics/"
+        }, {
+			"id": 1,
+            "name": "message.hpp",
+            "type": 2,
+            "last_modification": "2021-04-05",
+            "last_author": 1,
+            "path": "data_structures/"
+		}, {
+			"id": 2,
+            "name": "message.cpp",
+            "type": 3,
+            "last_modification": "2021-04-05",
+            "last_author": 1,
+            "path": "data_structures/"
+		}
+    ]
+}

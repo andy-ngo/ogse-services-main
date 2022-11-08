@@ -1,0 +1,42 @@
+00:00:00:000
+State for model input_reader is next time: 00:00:00:000
+State for model receiver1 is ackNum: 0
+00:00:00:000
+State for model input_reader is next time: 00:00:10:000
+State for model receiver1 is ackNum: 0
+00:00:10:000
+State for model input_reader is next time: 00:00:20:000
+State for model receiver1 is ackNum: 1
+00:00:20:000
+State for model input_reader is next time: 00:00:20:000
+State for model receiver1 is ackNum: 1
+00:00:30:000
+State for model input_reader is next time: 00:00:15:000
+State for model receiver1 is ackNum: 0
+00:00:40:000
+State for model input_reader is next time: 00:00:15:000
+State for model receiver1 is ackNum: 0
+00:00:45:000
+State for model input_reader is next time: 00:00:07:000
+State for model receiver1 is ackNum: 1
+00:00:52:000
+State for model input_reader is next time: 00:00:33:000
+State for model receiver1 is ackNum: 1
+00:01:02:000
+State for model input_reader is next time: 00:00:33:000
+State for model receiver1 is ackNum: 1
+00:01:25:000
+State for model input_reader is next time: 00:00:10:000
+State for model receiver1 is ackNum: 0
+00:01:35:000
+State for model input_reader is next time: 00:00:20:000
+State for model receiver1 is ackNum: 0
+00:01:45:000
+State for model input_reader is next time: 00:00:20:000
+State for model receiver1 is ackNum: 0
+00:01:55:000
+State for model input_reader is next time: inf
+State for model receiver1 is ackNum: 1
+00:02:05:000
+State for model input_reader is next time: inf
+State for model receiver1 is ackNum: 1

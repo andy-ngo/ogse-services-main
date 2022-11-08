@@ -1,0 +1,49 @@
+{
+    "id": 3,
+	"message_type": null,
+    "metadata": {
+        "name": "network",
+		"type" : "coupled",
+        "formalism": "DEVS",
+        "simulator": "Cadmium",
+        "description": "This is a network component that contains two subnets.",
+        "date_created": "2021-01-05",
+        "author": 3,
+        "tags": ["network", "simple"]
+    },
+    "ports": [{
+            "name": "inp_1",
+            "type": "input",
+			"message_type": 1,
+			"couplings": [["subnet1", "in"]]
+        }, {
+            "name": "inp_2",
+            "type": "input",
+			"message_type": 1,
+			"couplings": [["subnet2", "in"]]
+        }, {
+            "name": "outp_1",
+            "type": "output",
+			"message_type": 1,
+			"couplings": [["subnet1", "out"]]
+        }, {
+            "name": "outp_2",
+            "type": "output",
+			"message_type": 1,
+			"couplings": [["subnet2", "out"]]
+        }
+    ],
+	"submodels": [{
+		"id": "subnet1",
+		"model_type": 1,
+	},{
+		"id": "subnet2",
+		"model_type": 1
+	}],
+	"internal_couplings": [],
+	"message_types": [{
+		"id": 1,
+		"template" : "{\"value\":0}",
+		"description" : "The value associated to a packet."
+	}]
+}

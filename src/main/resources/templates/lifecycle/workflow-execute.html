@@ -1,0 +1,53 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<link th:href="@{/static/css/main.css}" rel="stylesheet"/>
+
+		<script type="text/javascript" th:src="@{/static/js/util.js}"></script>
+		
+		<script th:inline="javascript">
+			function get_data() {				
+				const data = new FormData();
+				
+				read_value("params", data, "params", false);
+								
+				return data;
+			}
+		
+			function on_click(url) {			
+				try {					
+					post(url, get_data()).then(response => get_blob(response))
+								   		 .then(blob => download("workflow_results.zip", blob))
+								   		 .catch(error => handle_error(error));
+				}
+				catch (error) {
+					alert(error.message);
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<div class="ribbon">
+			<a href="http://localhost:8080/api/model/list">MODELS</a>
+			<a href="http://localhost:8080/api/workflow/list">WORKFLOWS</a>
+			<a href="http://localhost:8080/api/visualization/list">VISUALIZATION</a>
+			<a href="http://localhost:8080/api/simulate">SIMULATION</a>
+		</div>
+		
+		<main>
+			<h1 th:text="'Workflow: ' + ${uuid}"> </h1>
+			
+			<div class="row">
+				<label>Parameters: </label>
+			</div>
+			<div class="row">
+				<textarea id="params"></textarea>
+			</div>
+			
+			<div class="row">
+				<button id="execute" th:attr="onclick=|on_click('http://localhost:8080/api/workflow/${uuid}/execute')|">Execute</button>
+			</div>
+		</main>
+	</body>
+</html>

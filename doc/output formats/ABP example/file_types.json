@@ -1,0 +1,21 @@
+[{
+	"id": 0,
+	"description": "Cadmium atomic source file",
+	"extension": "hpp"
+},{
+	"id": 1,
+	"description": "Cadmium coupled source file",
+	"extension": "hpp"
+},{
+	"id": 2,
+    "description": "Cadmium data structure header file",
+	"extension": "hpp"
+},{
+	"id": 3,
+    "description": "Cadmium data structure source file",
+	"extension": "cpp"
+},{
+	"id": 4,
+    "description": "Cadmium other source file",
+	"extension": "cpp"
+}]

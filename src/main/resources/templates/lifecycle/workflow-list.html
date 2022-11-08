@@ -1,0 +1,52 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<link th:href="@{/static/css/main.css}" rel="stylesheet"/>
+		
+		<script type="text/javascript" th:src="@{/static/js/util.js}"></script>
+		
+		<script th:inline="javascript">
+			function on_click(url) {			
+				try {								
+					_delete(url).then(response => get_json(response))
+					   		    .catch(error => handle_error(error));
+				}
+				catch (error) {
+					alert(error.message);
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<div class="ribbon">
+			<a href="http://localhost:8080/api/model/list">MODELS</a>
+			<a href="http://localhost:8080/api/workflow/list">WORKFLOWS</a>
+			<a href="http://localhost:8080/api/visualization/list">VISUALIZATION</a>
+			<a href="http://localhost:8080/api/simulate">SIMULATION</a>
+		</div>
+		
+		<main>
+			<div class="row inline">
+				<h1 th:text="${title}"></h1>
+				<a class="link" href="http://localhost:8080/api/workflow">New workflow...</a>
+			</div>
+			
+			<ul>
+				<li class="row loose" th:each="entity : ${entities}">
+					<div class="row tight">
+						<label>UUID: </label>
+						<a class="link" th:text="${entity.uuid.toString()}" th:href="${'http://localhost:8080/api/workflow/' + entity.uuid.toString()} + '/file'"></a>
+					</div>
+					<div class="row tight"><label>Name: </label><span th:text="${entity.name}"></span></div>
+					<div class="row tight"><label>Description: </label><span th:text="${entity.description}"></span></div>
+					<div class="row tight"><label>Date created: </label><span th:text="${entity.created}"></span></div>
+					<div class="row tight">
+						<a class="link" th:href="'http://localhost:8080/api/workflow/' + ${entity.uuid.toString()} + '/execute'">execute</a>
+						<a class="link delete" href th:attr="onclick=|on_click('http://localhost:8080/api/workflow/${entity.uuid.toString()}')|">delete</a>
+					</div>
+				</li>
+			</ul>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,14 @@
+{
+"type": "FeatureCollection",
+"name": "hospitals",
+"features": [
+{ "type": "Feature", "properties": { "fid": 2415, "index": "3968", "facility_name": "Hôpital Monfort Hospital", "rate": 300, "capacity": 1100 }, "geometry": { "type": "Point", "coordinates": [ -75.6392384, 45.4459814 ] } },
+{ "type": "Feature", "properties": { "fid": 3127, "index": "4860", "facility_name": "Queensway Carleton Hospital", "rate": 250, "capacity": 800 }, "geometry": { "type": "Point", "coordinates": [ -75.8069842, 45.3350269 ] } },
+{ "type": "Feature", "properties": { "fid": 3639, "index": "5657", "facility_name": "The Ottawa Hospital - General Campus", "rate": 450, "capacity": 1250 }, "geometry": { "type": "Point", "coordinates": [ -75.6469402, 45.4017202 ] } },
+{ "type": "Feature", "properties": { "fid": 3640, "index": "5658", "facility_name": "The Ottawa Hospital - Riverside Campus", "rate": 150, "capacity": 560 }, "geometry": { "type": "Point", "coordinates": [ -75.6688557, 45.3963547 ] } },
+{ "type": "Feature", "properties": { "fid": 3643, "index": "5660", "facility_name": "The Ottawa Hospital - Civic Campus", "rate": 225, "capacity": 900 }, "geometry": { "type": "Point", "coordinates": [ -75.7214357, 45.3925787 ] } },
+{ "type": "Feature", "properties": { "fid": 5054, "index": "S1245", "facility_name": "Hôpital de Gatineau", "rate": 250, "capacity": 800 }, "geometry": { "type": "Point", "coordinates": [ -75.691064, 45.493296 ] } },
+{ "type": "Feature", "properties": { "fid": 5104, "index": "S1290", "facility_name": "Hôpital de Hull", "rate": 200, "capacity": 900 }, "geometry": { "type": "Point", "coordinates": [ -75.746033, 45.444873 ] } },
+{ "type": "Feature", "properties": { "fid": 6159, "index": "S647", "facility_name": "Hôpital et CHSLD de Papineau", "rate": 75, "capacity": 350 }, "geometry": { "type": "Point", "coordinates": [ -75.411481, 45.588572 ] } }
+]
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<link th:href="@{/static/css/main.css}" rel="stylesheet"/>
+
+		<script type="text/javascript" th:src="@{/static/js/util.js}"></script>
+		
+		<script th:inline="javascript">
+			function get_data() {				
+				const data = new FormData();
+				
+				read_files("visualization", data, "visualization", true);
+				read_files("structure", data, "structure", true);
+				read_files("results", data, "messages", true);
+				read_files("data", data, "data", false);
+				read_value("name", data, "name", true);
+				read_value("description", data, "description", true);
+				
+				return data;
+			}
+		
+			function on_click(url) {			
+				try {					
+					post(url, get_data()).then(response => get_json(response))
+							   			 .then(json => show_output("output", JSON.stringify(json)))
+								   		 .catch(error => handle_error(error));
+				}
+				catch (error) {
+					alert(error.message);
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<div class="ribbon">
+			<a href="http://localhost:8080/api/model/list">MODELS</a>
+			<a href="http://localhost:8080/api/workflow/list">WORKFLOWS</a>
+			<a href="http://localhost:8080/api/visualization/list">VISUALIZATION</a>
+			<a href="http://localhost:8080/api/simulate">SIMULATION</a>
+		</div>
+		
+		<main>
+			<h1>Publish visualization</h1>
+			
+			<div class="row">
+				<label>Visualization file: </label><input id="visualization" type="file" />
+			</div>
+			
+			<div class="row">
+				<label>Structure file: </label><input id="structure" type="file" />
+			</div>
+			
+			<div class="row">
+				<label>Results file: </label><input id="results" type="file" />
+			</div>
+			
+			<div class="row">
+				<label>Data files: </label><input id="data" type="file" multiple />
+			</div>
+			
+			<div class="row">
+				<label>Name: </label><input id="name" type="text" />
+			</div>
+			
+			<div class="row">
+				<label>Description: </label><input id="description" type="text" />
+			</div>
+			
+			<div class="row">
+				<button id="publish" th:attr="onclick=|on_click('http://localhost:8080/api/visualization')|">Publish</button>
+			</div>
+			
+			<div id="output" class="output code hidden"></div>
+		</main>
+	</body>
+</html>

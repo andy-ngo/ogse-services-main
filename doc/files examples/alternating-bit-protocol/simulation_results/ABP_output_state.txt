@@ -1,0 +1,12 @@
+00:00:00:000
+input_reader_1;next time: 00:00:00:000
+sender1;0,0
+receiver1;0
+subnet1;0,0
+subnet2;0,0
+00:00:00:000
+input_reader_1;next time: inf
+sender1;0,0
+receiver1;0
+subnet1;0,0
+subnet2;0,0

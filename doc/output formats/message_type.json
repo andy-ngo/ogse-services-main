@@ -1,0 +1,5 @@
+{
+    "id": 0,
+    "template": "{\"packetNum\":0, \"totalPacketNum\":0}",
+    "description": "The state of the sender. packetNum is *something*. totalPacketNum is *something else*."
+}

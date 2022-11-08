@@ -1,0 +1,71 @@
+{
+    "id": 4,
+    "message_type": null,
+    "metadata": {
+        "name": "Alternate Bit Protocol",
+        "type": "top",
+        "formalism": "DEVS",
+        "simulator": "Cadmium",
+        "description": "This is a network model using the alternating bit protocol with a network of two subnets.",
+        "date_created": "2021-01-05",
+        "author": 3,
+        "tags": ["network", "simple", "abp"]
+    },
+    "ports": [{
+            "name": "inp_control",
+            "type": "input",
+            "message_type": 1,
+            "couplings": [["Sender", "controlIn"]]
+        }, {
+            "name": "outp_ack",
+            "type": "output",
+            "message_type": 1,
+            "couplings": [["Sender", "ackReceivedOut"]]
+        }, {
+            "name": "outp_pack",
+            "type": "output",
+            "message_type": 1,
+            "couplings": [["Sender", "packetSentOut"]]
+        }
+    ],
+    "submodels": [{
+            "id": "Sender",
+            "model_type": 0
+        }, {
+            "id": "Network",
+            "model_type": 3
+        }, {
+            "id": "Receiver",
+            "model_type": 1
+        }
+    ],
+    "internal_couplings": [{
+            "from": ["Sender", "dataOut"],
+            "to": ["Network", "inp_1"]
+        }, {
+            "from": ["Network", "outp_2"],
+            "to": ["Sender", "ackIn"]
+        }, {
+            "from": ["Receiver", "out_port"],
+            "to": ["Network", "inp_2"]
+        }, {
+            "from": ["Network", "outp_1"],
+            "to": ["Receiver", "in_port"]
+        }
+    ],
+    "message_types": [{
+            "id": 1,
+            "template": "{\"value\":0}",
+            "description": "The value associated to a packet."
+        }
+    ],
+    "source_files": [{
+            "id": 5,
+            "name": "main.cpp", 
+			"type": 3,
+            "last_modification": "2021-04-05",
+            "last_author": 1,
+            "path": "top_model/"
+        }
+    ]
+}

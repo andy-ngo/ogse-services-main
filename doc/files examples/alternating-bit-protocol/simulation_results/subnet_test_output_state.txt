@@ -1,0 +1,123 @@
+00:00:00:000
+State for model input_reader is next time: 00:00:00:000
+State for model subnet1 is index: 0 & transmitting: 0
+00:00:00:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 0 & transmitting: 0
+00:00:10:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 1 & transmitting: 1
+00:00:13:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 1 & transmitting: 0
+00:00:20:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 2 & transmitting: 1
+00:00:23:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 2 & transmitting: 0
+00:00:30:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 3 & transmitting: 1
+00:00:33:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 3 & transmitting: 0
+00:00:40:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 4 & transmitting: 1
+00:00:43:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 4 & transmitting: 0
+00:00:50:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 5 & transmitting: 1
+00:00:53:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 5 & transmitting: 0
+00:01:00:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 6 & transmitting: 1
+00:01:03:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 6 & transmitting: 0
+00:01:10:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 7 & transmitting: 1
+00:01:13:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 7 & transmitting: 0
+00:01:20:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 8 & transmitting: 1
+00:01:23:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 8 & transmitting: 0
+00:01:30:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 9 & transmitting: 1
+00:01:33:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 9 & transmitting: 0
+00:01:40:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 10 & transmitting: 1
+00:01:43:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 10 & transmitting: 0
+00:01:50:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 11 & transmitting: 1
+00:01:53:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 11 & transmitting: 0
+00:02:00:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 12 & transmitting: 1
+00:02:03:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 12 & transmitting: 0
+00:02:10:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 13 & transmitting: 1
+00:02:13:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 13 & transmitting: 0
+00:02:20:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 14 & transmitting: 1
+00:02:23:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 14 & transmitting: 0
+00:02:30:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 15 & transmitting: 0
+00:02:40:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 16 & transmitting: 1
+00:02:43:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 16 & transmitting: 0
+00:02:50:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 17 & transmitting: 1
+00:02:53:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 17 & transmitting: 0
+00:03:00:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 18 & transmitting: 1
+00:03:03:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 18 & transmitting: 0
+00:03:10:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 19 & transmitting: 1
+00:03:13:000
+State for model input_reader is next time: 00:00:10:000
+State for model subnet1 is index: 19 & transmitting: 0
+00:03:20:000
+State for model input_reader is next time: inf
+State for model subnet1 is index: 20 & transmitting: 1
+00:03:23:000
+State for model input_reader is next time: inf
+State for model subnet1 is index: 20 & transmitting: 0

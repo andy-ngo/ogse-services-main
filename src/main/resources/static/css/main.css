@@ -1,0 +1,111 @@
+html {
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	background-color: #fafafa
+}
+
+html, body {
+	margin:0
+}
+
+main {
+	margin: 0px 16px;
+}
+
+textarea {
+	min-width: 400px;
+	min-height: 200px;
+}
+
+.ribbon {
+    background-color: #396a6f;
+    padding: 0px 16px;
+}
+
+.ribbon a {
+    display: inline-block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+}
+
+.ribbon a:hover {
+    background-color: #14497d;
+    color: white;
+}
+
+h1 {
+	color: #396a6f;
+}
+
+.row {
+    margin-bottom: 12px;
+}
+
+.row.tight {
+    margin-bottom: 6px;
+}
+
+.row.loose {
+    margin-bottom: 24px;
+}
+
+.row.inline > * {
+	display: inline-block;
+}
+
+.row.inline a {
+	margin-left: 12px;
+}
+
+label {
+    margin-right: 6px;
+}
+
+.row label {
+	color: #396a6f;
+	font-weight: bold;
+}
+
+.row label.full {
+	width: 100%
+}
+
+.indent {
+	margin-left: 20px;
+}
+
+.indent.large {
+	margin-left: 40px;
+}
+
+.link:visited, .link {
+    color: #4571d5;
+}
+
+.link.back {
+	font-variant: all-petite-caps;
+}
+
+.link.delete:visited, .link.delete {
+	color: #d60101;
+}
+
+.link.delete:not(:first-child) {
+	margin-left: 12px;
+}
+
+.output {
+    padding: 8px;
+    border: solid thin #3a3a3a;
+    background: #f0f0f0;
+}
+
+.code {
+    font-family: courier;
+}
+
+.hidden {
+	display: none;
+}

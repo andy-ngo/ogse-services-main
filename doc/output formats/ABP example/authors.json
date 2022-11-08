@@ -1,0 +1,33 @@
+[{
+	"id": 0,
+	"first_name": "Bruno",
+	"last_name": "St-Aubin",
+	"middle_name": null,
+	"email": "staubin.bruno@gmail.com",
+	"affiliation" : "ARSLab - Carleton University",
+	"creation_date": "2020-02-04"
+},{
+	"id": 1,
+	"first_name": "Hamza",
+	"last_name": "Qassoud",
+	"middle_name": null,
+	"email": "hamza.qassoud@gmail.com",
+	"affiliation" : "ARSLab - Carleton University",
+	"creation_date": "2021-02-14"
+},{
+	"id": 2,
+	"first_name": "Prakhar",
+	"last_name": "Shukla",
+	"middle_name": null,
+	"email": "prakhar3109@gmail.com",
+	"affiliation" : "ARSLab - Carleton University",
+	"creation_date": "2021-05-12"
+},{
+	"id": 3,
+	"first_name": "Tao",
+	"last_name": "Zheng",
+	"middle_name": null,
+	"email": null,
+	"affiliation" : "ARSLab - Carleton University",
+	"creation_date": "2020-01-25"
+}]

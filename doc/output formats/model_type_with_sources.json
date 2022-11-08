@@ -1,0 +1,54 @@
+{
+    "id": 1,
+    "message_type": 2,
+    "metadata": {
+        "name": "receiver",
+        "type": "atomic",
+        "formalism": "DEVS",
+        "simulator": "Cadmium",
+        "description": "This is a network component that receives packets of data.",
+        "date_created": "2021-01-05",
+        "author": 0,
+        "tags": ["network", "simple"]
+    },
+    "ports": [{
+            "name": "in_port",
+            "type": "input",
+            "message_type": 1
+        }, {
+            "name": "out_port",
+            "type": "output",
+            "message_type": 1
+        }
+    ],
+    "message_types": [{
+            "id": 1,
+            "template": "{\"value\":0}",
+            "description": "The value associated to a packet."
+        }, {
+            "id": 2,
+            "template": "{\"ackNum: \":0}",
+            "description": "The state of the receiver. ackNum is *something*."
+        }
+    ],
+    "source_files": [{
+            "name": "receiver.hpp",
+			"type": 0,
+            "last_modification": "2021-04-05",
+            "last_author": 2,
+            "path": "atomics/"
+        }, {
+            "name": "message.hpp",
+			"type": 2,
+            "last_modification": "2021-04-05",
+            "last_author": 1,
+            "path": "data_structures/"
+        }, {
+            "name": "message.cpp",
+			"type": 3,
+            "last_modification": "2021-04-05",
+            "last_author": 1,
+            "path": "data_structures/"
+        }
+    ]
+}

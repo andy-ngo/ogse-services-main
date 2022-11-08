@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "hospitals",
+"features": [
+{ "type": "Feature", "properties": { "fid": 2415, "index": "3968", "facility_name": "Hôpital Monfort Hospital", "rate": 300, "capacity": 1100 }, "geometry": { "type": "Point", "coordinates": [ -75.409285798913345, 45.575325678467294 ] } },
+{ "type": "Feature", "properties": { "fid": 5054, "index": "S1245", "facility_name": "Hôpital de Gatineau", "rate": 250, "capacity": 800 }, "geometry": { "type": "Point", "coordinates": [ -75.396456304880047, 45.570113696516259 ] } },
+{ "type": "Feature", "properties": { "fid": 6159, "index": "S647", "facility_name": "Hôpital et CHSLD de Papineau", "rate": 75, "capacity": 350 }, "geometry": { "type": "Point", "coordinates": [ -75.411481, 45.588572 ] } }
+]
+}
