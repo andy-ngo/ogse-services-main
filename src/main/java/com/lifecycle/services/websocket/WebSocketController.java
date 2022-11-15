@@ -28,6 +28,7 @@ import com.lifecycle.components.rest.Controller;
 import com.lifecycle.components.rest.FilesResponse;
 import com.lifecycle.components.rest.RestResponse;
 
+//put into the visualization controller instead
 public class WebSocketController extends Controller{
     /* 
     @Override

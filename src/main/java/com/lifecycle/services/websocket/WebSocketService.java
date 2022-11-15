@@ -1,29 +1,6 @@
 package com.lifecycle.services.websocket;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.lifecycle.components.entities.Entities;
-import com.lifecycle.components.entities.Entity;
-import com.lifecycle.components.entities.Message;
-import com.lifecycle.components.io.ZipFile;
-import com.lifecycle.components.rest.Controller;
-import com.lifecycle.components.rest.FilesResponse;
-import com.lifecycle.components.rest.RestResponse;
-
-import java.io.IOException;
+import java.io.File;
 import java.util.HashMap;
 
 import javax.websocket.*;
@@ -35,6 +12,31 @@ public class WebSocketService {
 	private Session session;
     private static HashMap<String,String> simulations = new HashMap<>();
 	
+    //call from visualization folder to call specific uuid
+    //grab uuid messages.log file and send it to client
+
+    //run the web socket and then make it run frontend
+    //do folder.get(messages.log) to get a file
+
+    //method to start connection
+    public void startConnection(Session session)
+    {
+
+    }
+
+    //method to get the file
+    public File getResults(String uuid)
+    {
+        return null;
+    }
+
+    //method stream to frontend
+    public void sendResults(File takefile)
+    {
+
+    }
+
+    /* 
 	@OnOpen
 	public void onOpen(Session session, @PathParam("file_name") String name) throws IOException {
 		// Get session and WebSocket connection
@@ -67,6 +69,6 @@ public class WebSocketService {
     private static void broadcast(Message message) throws IOException,EncodeException{
         // Display the simulation data
     }
-
+    */
     
 }
