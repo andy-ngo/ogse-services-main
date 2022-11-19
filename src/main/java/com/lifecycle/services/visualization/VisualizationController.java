@@ -104,4 +104,10 @@ public class VisualizationController extends Controller {
         
         return mv;
 	}
+
+	//for websocket
+	@GetMapping(path="/api/visualization/{uuid}", produces=MediaType.APPLICATION_JSON_VALUE)
+    public Entity getVisualization(@PathVariable String uuid) throws Exception {
+    	return this.vService.Read(uuid);
+	}
 }
