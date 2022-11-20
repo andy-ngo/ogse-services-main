@@ -40,20 +40,40 @@ public class WebSocketService {
     public void startConnection(Session session)
     {
         this.session = session;
-        getResults(null);
     }
 
     //method to get the file
-    public File getResults(String uuid)
+    public File getResults(Session session,String uuid)
     {
         return new File (APP_VISUALIZATIONS);
     }
 
     //method stream to frontend
-    public void sendResults(File takefile)
+    public void sendResults(Session session, File file)
     {
-        
+        /* 
+        try
+        {
+            for(Session sess : session.getOpenSessions())
+            {
+                if(sess.isOpen())
+                    sess.getBasicRemote().sendText(file);
+            }
+        } catch (IOException e) {}
+        */
     }
+
+    /* 
+    public void connectionError(Session session, Throwable throwable)
+    {
+
+    }
+
+    public void endConnection(Session session)
+    {
+
+    }
+    */
 
     /* 
 	@OnOpen

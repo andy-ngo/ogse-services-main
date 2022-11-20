@@ -1,0 +1,2 @@
+https://www.baeldung.com/websockets-spring
+https://docs.oracle.com/javaee/7/tutorial/websocket007.htm
