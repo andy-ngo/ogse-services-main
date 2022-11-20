@@ -27,6 +27,9 @@ import com.lifecycle.components.io.ZipFile;
 public class WebSocketService {
 	private Session session;
 
+    @Value("${app.folders.visualizations}")
+	private String APP_FOLDERS_VISUALIZATIONS;
+
     @Value("${app.visualizations}")
 	private String APP_VISUALIZATIONS;
 	
@@ -45,7 +48,9 @@ public class WebSocketService {
     //method to get the file
     public File getResults(Session session,String uuid)
     {
-        return new File (APP_VISUALIZATIONS);
+        Folder folder = new Folder (APP_FOLDERS_VISUALIZATIONS,uuid);
+        File resultFile = folder.get(APP_VISUALIZATIONS);
+        return resultFile;
     }
 
     //method stream to frontend
