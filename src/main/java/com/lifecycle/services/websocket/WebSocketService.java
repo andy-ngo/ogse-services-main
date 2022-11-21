@@ -46,10 +46,17 @@ public class WebSocketService {
     }
 
     //method to get the file
-    public File getResults(Session session,String uuid)
+    public File getResults(String uuid) throws Exception
     {
-        Folder folder = new Folder (APP_FOLDERS_VISUALIZATIONS,uuid);
-        File resultFile = folder.get(APP_VISUALIZATIONS);
+        Folder folder;
+        File resultFile = null;
+		try {
+			folder = new Folder (APP_FOLDERS_VISUALIZATIONS,uuid);
+			resultFile = folder.file("messages.log");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
         return resultFile;
     }
 
