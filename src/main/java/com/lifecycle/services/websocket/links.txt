@@ -1,2 +1,4 @@
 https://www.baeldung.com/websockets-spring
 https://docs.oracle.com/javaee/7/tutorial/websocket007.htm
+https://developer.okta.com/blog/2019/10/09/java-spring-websocket-tutorial
+https://www.youtube.com/watch?v=U4lqTmFmbAM
