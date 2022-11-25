@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -108,7 +110,9 @@ public class VisualizationController extends Controller {
 	//for websocket
 	@MessageMapping("/chat")
 	@SendTo("/topic/messages")
-	public WebSocketController send(@RequestPart MultippartFile messages) throws Exception {
+	public WebSocketController send(message_test message) throws Exception 
+	{
 		String time = new SimpleDateFormat("HH:mm").format(new Date());
 		return new OutputMessage(message.getFrom(), message.getText(), time);
+	}
 }
