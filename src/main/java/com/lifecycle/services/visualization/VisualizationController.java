@@ -106,8 +106,9 @@ public class VisualizationController extends Controller {
 	}
 
 	//for websocket
-	@GetMapping(path="/api/visualization/{uuid}", produces=MediaType.APPLICATION_JSON_VALUE)
-    public Entity getVisualization(@PathVariable String uuid) throws Exception {
-    	return this.vService.Read(uuid);
-	}
+	@MessageMapping("/chat")
+	@SendTo("/topic/messages")
+	public WebSocketController send(@RequestPart MultippartFile messages) throws Exception {
+		String time = new SimpleDateFormat("HH:mm").format(new Date());
+		return new OutputMessage(message.getFrom(), message.getText(), time);
 }
