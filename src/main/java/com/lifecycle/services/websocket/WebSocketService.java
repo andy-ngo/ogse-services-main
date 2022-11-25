@@ -65,7 +65,7 @@ public class WebSocketService {
     }
 
     //method stream to front end
-    public void sendResults(Session session, File file)
+    public void sendResults(Session session, File file) //instead of File file replace String uuid?
     {
     	try {
     		File resultFile = getResults(uuid);
@@ -84,7 +84,7 @@ public class WebSocketService {
 	    } catch (IOException ex) {
 	        ex.printStackTrace();
 	    }
-		websocket.close();
+		websocket.close(); //session.close()?
     }
 
     /* 
