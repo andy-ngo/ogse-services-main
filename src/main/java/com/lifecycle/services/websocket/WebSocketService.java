@@ -1,8 +1,12 @@
 package com.lifecycle.services.websocket;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
@@ -63,16 +67,24 @@ public class WebSocketService {
     //method stream to front end
     public void sendResults(Session session, File file)
     {
-        /* 
-        try
-        {
-            for(Session sess : session.getOpenSessions())
-            {
-                if(sess.isOpen())
-                    sess.getBasicRemote().sendText(file);
-            }
-        } catch (IOException e) {}
-        */
+    	try {
+    		File resultFile = getResults(uuid);
+			PrintWriter out = new PrintWriter(websocket output, true);
+	        BufferedReader data = new BufferedReader(new FileReader(resultFile));
+	        String line;
+
+	        while ((line = data.readLine()) != null) {
+	        	System.out.println(line);
+	        	out.println(line);
+	        	out.flush();
+	        }
+	        data.close();
+	    } catch (FileNotFoundException ex) {
+	        ex.printStackTrace();
+	    } catch (IOException ex) {
+	        ex.printStackTrace();
+	    }
+		websocket.close();
     }
 
     /* 
