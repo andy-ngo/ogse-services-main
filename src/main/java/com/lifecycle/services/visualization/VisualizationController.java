@@ -27,6 +27,7 @@ import com.lifecycle.components.io.ZipFile;
 import com.lifecycle.components.rest.Controller;
 import com.lifecycle.components.rest.FilesResponse;
 import com.lifecycle.components.rest.RestResponse;
+import com.lifecycle.services.websocket.ModelResults;
 
 @RestController
 public class VisualizationController extends Controller {
@@ -108,11 +109,10 @@ public class VisualizationController extends Controller {
 	}
 
 	//for websocket
-	@MessageMapping("/chat")
-	@SendTo("/topic/messages")
-	public WebSocketController send(message_test message) throws Exception 
-	{
-		String time = new SimpleDateFormat("HH:mm").format(new Date());
-		return new OutputMessage(message.getFrom(), message.getText(), time);
-	}
+	@MessageMapping("/chat.send")
+    @SendTo("/topic/public")
+    public ModelResults put(@RequestPart final ModelResults modelResults)
+    {
+        return modelResults;
+    }
 }
