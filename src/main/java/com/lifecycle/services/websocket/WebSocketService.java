@@ -27,7 +27,7 @@ import com.lifecycle.components.io.Folder;
 import com.lifecycle.components.io.UuidFolder;
 import com.lifecycle.components.io.ZipFile;
 
-@ServerEndpoint(value = "/chat/{username}")
+@ServerEndpoint(value = "/receive/results")
 public class WebSocketService {
 	private Session session;
 
@@ -44,6 +44,7 @@ public class WebSocketService {
     //do folder.get(messages.log) to get a file
 
     //method to start connection
+    @OnOpen
     public void startConnection(Session session)
     {
         this.session = session;
@@ -65,7 +66,8 @@ public class WebSocketService {
     }
 
     //method stream to front end
-    public void sendResults(Session session, File file) //instead of File file replace String uuid?
+    @OnMessage
+    public void sendResults(Session session, String uuid) //instead of File file replace String uuid?
     {
     	try {
     		File resultFile = getResults(uuid);
@@ -84,18 +86,19 @@ public class WebSocketService {
 	    } catch (IOException ex) {
 	        ex.printStackTrace();
 	    }
-		websocket.close(); //session.close()?
+		session.close();
     }
 
-    /* 
+    @OnError
     public void connectionError(Session session, Throwable throwable)
     {
-
+    	throwable.printStackTrace();
     }
 
-    public void endConnection(Session session)
+    @OnClose
+    public void endConnection(Session session, CloseReason reason) throws Exception
     {
-
+    	session.close(reason);
     }
-    */    
+        
 }
