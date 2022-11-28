@@ -109,7 +109,7 @@ public class VisualizationController extends Controller {
 	}
 
 	//for websocket
-	@MessageMapping("/chat.send")
+	@MessageMapping("/results.send")
     @SendTo("/topic/public")
     public ModelResults put(@RequestPart final ModelResults modelResults)
     {
