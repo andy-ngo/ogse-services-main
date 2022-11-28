@@ -36,12 +36,6 @@ public class WebSocketService {
 
     @Value("${app.visualizations}")
 	private String APP_VISUALIZATIONS;
-	
-    //call from visualization folder to call specific uuid
-    //grab uuid messages.log file and send it to client
-
-    //run the web socket and then make it run front end
-    //do folder.get(messages.log) to get a file
 
     //method to start connection
     @OnOpen
@@ -67,11 +61,11 @@ public class WebSocketService {
 
     //method stream to front end
     @OnMessage
-    public void sendResults(Session session, String uuid) //instead of File file replace String uuid?
+    public void sendResults(Session session, String uuid)
     {
     	try {
     		File resultFile = getResults(uuid);
-			PrintWriter out = new PrintWriter(websocket output, true);
+			//PrintWriter out = new PrintWriter(websocket output, true);
 	        BufferedReader data = new BufferedReader(new FileReader(resultFile));
 	        String line;
 
