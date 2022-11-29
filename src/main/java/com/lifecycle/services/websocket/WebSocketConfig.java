@@ -13,7 +13,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer
 	@Override
     public void registerStompEndpoints(final StompEndpointRegistry registry)
     {
-        registry.addEndpoint("/chat-example").withSockJS();
+        registry.addEndpoint("/results-example").withSockJS();
     }
 
     @Override
