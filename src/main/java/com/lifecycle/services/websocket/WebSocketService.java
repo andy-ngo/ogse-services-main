@@ -3,10 +3,13 @@ package com.lifecycle.services.websocket;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +33,7 @@ import com.lifecycle.components.io.ZipFile;
 @ServerEndpoint(value = "/receive/results")
 public class WebSocketService {
 	private Session session;
+	Socket socketOutput = null;
 
     @Value("${app.folders.visualizations}")
 	private String APP_FOLDERS_VISUALIZATIONS;
@@ -45,6 +49,7 @@ public class WebSocketService {
     }
 
     //method to get the file
+    @OnMessage
     public File getResults(String uuid) throws Exception
     {
         Folder folder;
@@ -61,11 +66,13 @@ public class WebSocketService {
 
     //method stream to front end
     @OnMessage
-    public void sendResults(Session session, String uuid)
+    public void sendResults(Session session, String uuid) throws Exception
     {
     	try {
+    		socketOutput = new Socket("localhost", 8080);
+    		OutputStream output = socketOutput.getOutputStream();
     		File resultFile = getResults(uuid);
-			//PrintWriter out = new PrintWriter(websocket output, true);
+			PrintWriter out = new PrintWriter(output);
 	        BufferedReader data = new BufferedReader(new FileReader(resultFile));
 	        String line;
 
