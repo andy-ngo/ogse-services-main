@@ -63,13 +63,24 @@ public class WebSocketService {
 		} 
         return resultFile;
     }
-
+    
+    /**
+     * Tickets
+     * -> convert to websockets / remove try and catch
+     * -> socket class
+     * -> integrate into visualization service
+     * -> document communication
+     * -> create REST entry point
+     * -> unique websocket for each user
+     * -> show in basic UI
+     */
+  
     //method stream to front end
     @OnMessage
     public void sendResults(Session session, String uuid) throws Exception
     {
     	try {
-    		socketOutput = new Socket("localhost", 8080);
+    		socketOutput = new Socket("localhost", 8080); //switch to websockets
     		OutputStream output = socketOutput.getOutputStream();
     		File resultFile = getResults(uuid);
 			PrintWriter out = new PrintWriter(output);
