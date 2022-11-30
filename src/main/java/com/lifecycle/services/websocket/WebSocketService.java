@@ -48,6 +48,19 @@ public class WebSocketService {
         this.session = session;
     }
 
+    
+    /**
+     * Tickets
+     * -> convert to websockets / remove try and catch
+     * -> socket class
+     * -> integrate into visualization service
+     * -> document communication
+     * -> create REST entry point
+     * -> unique websocket for each user
+     * -> show in basic UI
+     */
+    
+    /*
     //method to get the file
     @OnMessage
     public File getResults(String uuid) throws Exception
@@ -63,17 +76,6 @@ public class WebSocketService {
 		} 
         return resultFile;
     }
-    
-    /**
-     * Tickets
-     * -> convert to websockets / remove try and catch
-     * -> socket class
-     * -> integrate into visualization service
-     * -> document communication
-     * -> create REST entry point
-     * -> unique websocket for each user
-     * -> show in basic UI
-     */
   
     //method stream to front end
     @OnMessage
@@ -99,7 +101,7 @@ public class WebSocketService {
 	        ex.printStackTrace();
 	    }
 		session.close();
-    }
+    }*/
 
     @OnError
     public void connectionError(Session session, Throwable throwable)
