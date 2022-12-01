@@ -1,0 +1,40 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+        <link th:href="@{/css/main.css}" rel="stylesheet"/>
+        <script type="text/javascript" th:src="@{/js/script.js}"></script>
+        <script th:inline="javascript">
+            function on_click(url, uuid) {			
+				try {					
+					post(url, read_value("uuid", "uuid", true)).catch(error => handle_error(error));
+				}
+				catch (error) {
+					alert(error.message);
+				}
+			}
+        </script>
+    </head>
+
+    <body>
+        <main>
+            <div class="row">
+                <form>
+                    UUID: 
+                    <textarea rows="1" cols="10" name="uuid" required>
+
+                    </textarea>
+                </form>
+            </div>
+            <div class="row">
+				<button id="connect" th:attr="onclick=|on_click('http://localhost:8080/demo/connect')|">Connect</button>
+			</div>
+            <div class ="row">
+                <form>
+                    Received: <br>
+                    <textarea rows="50" cols="50" name="received" readonly>
+
+                    </textarea>
+                </form>
+            </div>
+        </main>
+    </body>
