@@ -1,10 +1,10 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-3.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
-        <link th:href="@{/css/main.css}" rel="stylesheet"/>
-        <script type="text/javascript" th:src="@{/js/script.js}"></script>
+        <link th:href="@{/static/css/main.css}" rel="stylesheet"/>
+        <script type="text/javascript" th:src="@{/static/js/demo.js}"></script>
         <script th:inline="javascript">
-            function on_click(url, uuid) {			
+            function on_click(url) {			
 				try {					
 					post(url, read_value("uuid", "uuid", true)).catch(error => handle_error(error));
 				}
@@ -16,14 +16,17 @@
     </head>
 
     <body>
+
+        <div class="ribbon">
+			<a href="http://localhost:8080/api/model/list">MODELS</a>
+			<a href="http://localhost:8080/api/workflow/list">WORKFLOWS</a>
+			<a href="http://localhost:8080/api/visualization/list">VISUALIZATION</a>
+			<a href="http://localhost:8080/api/simulate">SIMULATION</a>
+		</div>
+
         <main>
             <div class="row">
-                <form>
-                    UUID: 
-                    <textarea rows="1" cols="10" name="uuid" required>
-
-                    </textarea>
-                </form>
+                <label>UUID: </label><input id="uuid" type="text"/>
             </div>
             <div class="row">
 				<button id="connect" th:attr="onclick=|on_click('http://localhost:8080/demo/connect')|">Connect</button>
@@ -31,8 +34,7 @@
             <div class ="row">
                 <form>
                     Received: <br>
-                    <textarea rows="50" cols="50" name="received" readonly>
-
+                    <textarea name="received" readonly>
                     </textarea>
                 </form>
             </div>
