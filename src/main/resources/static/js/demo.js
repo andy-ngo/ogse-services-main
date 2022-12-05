@@ -1,4 +1,4 @@
-let socket = new WebSocket("wss://localhost:8080/demo");
+let socket = new WebSocket("wss://localhost:8080/demo/connect/1234");
 
 socket.onopen = function(e){
     alert('[open] Connection Established');
@@ -34,4 +34,8 @@ function read_value(id, name, mandatory) {
 
 function post(url, data) {
 	return fetch(url, { method: 'post', body: data });
+}
+
+function elem(id) {
+	return document.querySelector("#" + id);
 }
