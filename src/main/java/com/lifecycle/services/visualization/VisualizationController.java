@@ -109,14 +109,6 @@ public class VisualizationController extends Controller {
         return mv;
 	}
 
-	//for websocket
-	@MessageMapping("/results.send")
-    @SendTo("/topic/public")
-    public ModelResults put(@RequestPart final ModelResults modelResults)
-    {
-        return modelResults;
-    }
-
 	VisualizationService vs = new VisualizationService();
 	
     @MessageMapping("/results.send")
