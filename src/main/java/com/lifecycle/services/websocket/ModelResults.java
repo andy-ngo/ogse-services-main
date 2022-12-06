@@ -16,7 +16,7 @@ public class ModelResults
 		this.results = results;
 	}
 	
-	public String getResults()
+	public String getResults() 
 	{
 		return this.results;
 	}

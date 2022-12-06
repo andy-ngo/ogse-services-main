@@ -7,7 +7,7 @@
  * -> create REST entry point
  * -> unique websocket for each user
  * -> show in basic UI
- */
+ */ 
 
 package com.lifecycle.services.websocket;
 

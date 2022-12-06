@@ -131,7 +131,7 @@ public class VisualizationService {
     
     //method to stream results 
     public void sendResults(File resultsFile) throws Exception
-    {
+    { 
     	Socket socket = new Socket("localhost", 8080); //switch to websockets
     	OutputStream output = socket.getOutputStream();
 		PrintWriter out = new PrintWriter(output);

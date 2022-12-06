@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -114,5 +115,23 @@ public class VisualizationController extends Controller {
     public ModelResults put(@RequestPart final ModelResults modelResults)
     {
         return modelResults;
+    }
+
+	VisualizationService vs = new VisualizationService();
+	
+    @MessageMapping("/results.send")
+    @SendTo("/topic/public")
+    public ModelResults sendWSResults(@Payload final ModelResults modelResults)
+    {
+    	/*
+    	String message = modelResults.getResults();
+    	
+    	if(message.equals(uuid)) //make a method in vs that will check the visualization folder for the given uuid id and return boolean
+    	{
+    		modelResults.setResults(vs.sendResults(getResults(uuid)));
+    		return modelResults;
+    	}
+    	*/
+    	return modelResults;
     }
 }
