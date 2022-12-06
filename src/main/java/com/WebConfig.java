@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
@@ -17,7 +18,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 @Configuration
 @EnableWebMvc
 @EnableWebSocketMessageBroker
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer/*, WebSocketMessageBrokerConfigurer*/{
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -30,7 +31,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void registerStompEndpoints(final StompEndpointRegistry registry)
     {
-        registry.addEndpoint("/chat-example").withSockJS();
+        registry.addEndpoint("/results").withSockJS();
     }
 
     @Override

@@ -1,14 +1,33 @@
 package com.lifecycle.services.websocket;
 
-import lombok.Builder;
-import lombok.Getter;
-
-@Builder
 public class ModelResults 
 {
-	@Getter
 	private String results;
-	
-	@Getter
 	private String user;
+	
+	public ModelResults(String results, String user)
+	{
+		this.results = results;
+		this.user = user;
+	}
+	
+	public void setResults(String results)
+	{
+		this.results = results;
+	}
+	
+	public String getResults()
+	{
+		return this.results;
+	}
+	
+	public void setUser(String user)
+	{
+		this.user = user;
+	}
+	
+	public String getUser()
+	{
+		return this.user;
+	}
 }
