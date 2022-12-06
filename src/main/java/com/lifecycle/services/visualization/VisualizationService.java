@@ -130,13 +130,12 @@ public class VisualizationService {
     }
     
     //method to stream results 
-    public void sendResults(Session session, String uuid) throws Exception
+    public void sendResults(File resultsFile) throws Exception
     {
     	Socket socket = new Socket("localhost", 8080); //switch to websockets
     	OutputStream output = socket.getOutputStream();
-    	File resultFile = getResults(uuid);
 		PrintWriter out = new PrintWriter(output);
-	    BufferedReader data = new BufferedReader(new FileReader(resultFile));
+	    BufferedReader data = new BufferedReader(new FileReader(resultsFile));
 	    String line;
 
 	    while ((line = data.readLine()) != null) {
@@ -146,6 +145,5 @@ public class VisualizationService {
 	    }
 	    data.close();
 	    socket.close();
-		session.close();
     }
 }
