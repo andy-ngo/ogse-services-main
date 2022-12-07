@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,25 @@ public class ConnectService {
 	}
 	
 	//websocket connection methods
+	public void connectWebsocket(String uuid) {
+		try {
+			System.out.println("connecting...");
+			final WebSocketClientEndpoint clientEndPoint = new WebSocketClientEndpoint(new URI("wss://localhost:8080/demo/connect/" + uuid));
+			System.out.println("connected");
+			clientEndPoint.addMessageHandler(new WebSocketClientEndpoint.MessageHandler() {
+                public void handleMessage(String message) {
+                    System.out.println(message);
+                }
+            });
+			System.out.println("sending message...");
+			clientEndPoint.sendMessage("test");
+			System.out.println("test sent");
+		}
+		catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	//method to get the file
     public File getResults(String uuid) throws Exception

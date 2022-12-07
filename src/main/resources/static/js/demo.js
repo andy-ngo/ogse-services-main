@@ -1,8 +1,12 @@
-let socket = new WebSocket("wss://localhost:8080/demo/connect/1234");
+let socket = null;
+
+function open_websocket(id){
+    var uuid = elem(id).value;
+    socket = new WebSocket("wss://localhost:8080/demo/connect/" + uuid);
+}
 
 socket.onopen = function(e){
     alert('[open] Connection Established');
-
 };
 
 socket.onmessage = function(event){

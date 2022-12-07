@@ -22,6 +22,7 @@ private final ConnectService cService;
 	@PostMapping("/demo/connect")
     public void connect(@RequestParam(value = "uuid", required = true) String uuid) throws Exception {    	
 		System.out.println(uuid + " REST API connected!");
+		cService.connectWebsocket(uuid);
     }
 	
 	@GetMapping(path="/demo/connect", produces = MediaType.TEXT_HTML_VALUE)

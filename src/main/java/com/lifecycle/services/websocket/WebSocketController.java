@@ -23,6 +23,7 @@ import com.lifecycle.services.visualization.VisualizationService;
 @Controller
 public class WebSocketController 
 {
+	/*
 	VisualizationService vs = new VisualizationService();
 	
     @MessageMapping("/results.send")
@@ -37,7 +38,7 @@ public class WebSocketController
     		modelResults.setResults(vs.sendResults(getResults(uuid)));
     		return modelResults;
     	}
-    	*/
+    	
     	return modelResults;
     }
     
@@ -52,5 +53,5 @@ public class WebSocketController
     {
     	session.close(reason);
     }
-        
+        */
 }
