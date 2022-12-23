@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
@@ -18,7 +19,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 @Configuration
 @EnableWebMvc
 @EnableWebSocketMessageBroker
-public class WebConfig implements WebMvcConfigurer/*, WebSocketMessageBrokerConfigurer*/{
+public class WebConfig implements WebMvcConfigurer, WebSocketMessageBrokerConfigurer{
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -26,21 +27,27 @@ public class WebConfig implements WebMvcConfigurer/*, WebSocketMessageBrokerConf
 		        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
     }
     
-    /*
     //Websocket configuration
     @Override
     public void registerStompEndpoints(final StompEndpointRegistry registry)
     {
-        registry.addEndpoint("/results").withSockJS();
+        registry.addEndpoint("/results-channel").withSockJS();
     }
 
     @Override
     public void configureMessageBroker(final MessageBrokerRegistry registry)
     {
-        registry.setApplicationDestinationPrefixes("/app");
-        registry.enableSimpleBroker("/topic");
+        registry.setApplicationDestinationPrefixes("/server");
+        registry.enableSimpleBroker("/client");
     }
-    */
+    
+    @Override
+    public void configureWebSocketTransport(WebSocketTransportRegistration registry)
+    {
+    	registry.setMessageSizeLimit(500*1024);
+    	registry.setSendBufferSizeLimit(1024*1024);
+    	registry.setSendTimeLimit(20000);
+    }
 
     @Bean
     public ClassLoaderTemplateResolver templateResolver() {
