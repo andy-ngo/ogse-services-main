@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
-import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 
@@ -27,7 +26,7 @@ public class WebSocketEventListener
 	@EventListener
 	public void handleWebSocketDisconnectListener(final SessionConnectedEvent event)
 	{
-		ModelResults results = ModelResults.builder().build();
+		ModelResults results = new ModelResults();
 		
 		sendingOperations.convertAndSend("client/connection.close", results);
 	}

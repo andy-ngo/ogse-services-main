@@ -11,8 +11,6 @@
 
 package com.lifecycle.services.websocket;
 
-import javax.websocket.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -71,7 +69,7 @@ public class WebSocketController
     @SendTo("/topic/public")
     public ModelResults sendWSResults(@Payload final ModelResults modelResults)
     {
-    	/*
+    	
     	String message = modelResults.getResults();
     	
     	if(message.equals(uuid)) //make a method in vs that will check the visualization folder for the given uuid id and return boolean
@@ -93,6 +91,7 @@ public class WebSocketController
     public void endConnection(Session session, CloseReason reason) throws Exception
     {
     	session.close(reason);
-    }
-        */
+    }*/
+        
 }
+
