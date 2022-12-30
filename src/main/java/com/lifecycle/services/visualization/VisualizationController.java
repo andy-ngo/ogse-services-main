@@ -109,6 +109,7 @@ public class VisualizationController extends Controller {
         return mv;
 	}
 
+	/*
 	VisualizationService vs = new VisualizationService();
 	
     @MessageMapping("/results.send")
@@ -123,7 +124,7 @@ public class VisualizationController extends Controller {
     		modelResults.setResults(vs.sendResults(getResults(uuid)));
     		return modelResults;
     	}
-    	*/
+
     	return modelResults;
-    }
+    }*/
 }

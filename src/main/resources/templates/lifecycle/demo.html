@@ -2,18 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
         <link th:href="@{/static/css/main.css}" rel="stylesheet"/>
-        <script type="text/javascript" th:src="@{/static/js/demo.js}"></script>
-        <script th:inline="javascript">
-            function on_click(url) {			
-				try {					
-					post(url, read_value("uuid", "uuid", true)).catch(error => handle_error(error));
-                    open_websocket("uuid");
-				}
-				catch (error) {
-					alert(error.message);
-				}
-			}
-        </script>
     </head>
 
     <body>
@@ -27,17 +15,23 @@
 
         <main>
             <div class="row">
-                <label>UUID: </label><input id="uuid" type="text"/>
+                <label>UUID: </label><input id="uuid" type="text" value="3f85a4a6-93a5-4cc4-a55e-5633b48010ae"/>
             </div>
             <div class="row">
-				<button id="connect" th:attr="onclick=|on_click('http://localhost:8080/demo/connect')|">Connect</button>
+				<button id="connect">Connect</button>
 			</div>
             <div class ="row">
-                <form>
-                    Received: <br>
-                    <textarea name="received" readonly>
-                    </textarea>
-                </form>
+                <label> Received: </label>
+                <br>
+                <textarea id="received" readonly></textarea>
+            </div>
+            <div class ="row">
+                <button id="continue">Continue</button>
+                <button id="disconnect">Disconnect</button>
             </div>
         </main>
+
+        <script type="text/javascript" th:src="@{/static/js/demo.js}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     </body>
