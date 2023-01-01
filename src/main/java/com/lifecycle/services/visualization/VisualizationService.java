@@ -123,13 +123,14 @@ public class VisualizationService {
     //method to get the file
     public File getResults(String uuid) throws Exception
     {
-        Folder folder = new Folder (APP_FOLDERS_VISUALIZATIONS,uuid);
+        Folder folder = new Folder ("C:\\Users\\andyboi\\Documents\\lome-files\\visualizations",uuid);
         File resultFile = null;
 		resultFile = folder.file("messages.log");
         return resultFile;
     }
     
     //method to stream results 
+    /*
     public void sendResults(File resultsFile) throws Exception
     { 
     	Socket socket = new Socket("localhost", 8080); //switch to websockets
@@ -146,4 +147,5 @@ public class VisualizationService {
 	    data.close();
 	    socket.close();
     }
+    */
 }
