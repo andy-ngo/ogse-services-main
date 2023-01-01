@@ -9,12 +9,14 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.websocket.OnMessage;
 import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +41,11 @@ public class VisualizationService {
 	public VisualizationService() {
 
 	}
+
+	@Autowired
+	private SimpMessageSendingOperations sendOps;
+
+	private Scanner scan = null;
 	
     public Entities<Entity> Entities() throws JsonParseException, JsonMappingException, IOException {
     	return new Entities<Entity>(APP_VISUALIZATIONS, Entity.class); 
@@ -123,29 +130,25 @@ public class VisualizationService {
     //method to get the file
     public File getResults(String uuid) throws Exception
     {
-        Folder folder = new Folder ("C:\\Users\\andyboi\\Documents\\lome-files\\visualizations",uuid);
+        Folder folder = new Folder (APP_FOLDERS_VISUALIZATIONS,uuid);
         File resultFile = null;
 		resultFile = folder.file("messages.log");
         return resultFile;
     }
     
-    //method to stream results 
-    /*
-    public void sendResults(File resultsFile) throws Exception
+    //method to stream results
+    public void sendResults(String uuid) throws Exception
     { 
-    	Socket socket = new Socket("localhost", 8080); //switch to websockets
-    	OutputStream output = socket.getOutputStream();
-		PrintWriter out = new PrintWriter(output);
-	    BufferedReader data = new BufferedReader(new FileReader(resultsFile));
-	    String line;
+    	File resultFile = getResults(uuid);
+		if(scan == null) scan = new Scanner(resultFile);
 
-	    while ((line = data.readLine()) != null) {
-	       	System.out.println(line);
-	       	out.println(line);
-	       	out.flush();
-	    }
-	    data.close();
-	    socket.close();
+		int i = 0;
+		while(scan.hasNextLine() && i < 10)
+		{
+			sendOps.convertAndSend("/client/results.send", scan.nextLine());
+			i++;
+		}
+
+		if(!scan.hasNextLine()) scan.close();
     }
-    */
 }

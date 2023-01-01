@@ -109,21 +109,31 @@ public class VisualizationController extends Controller {
         return mv;
 	}
 
-	VisualizationService vs = new VisualizationService();
-	
-    @MessageMapping("/results.send")
-    @SendTo("/topic/public")
-    public ModelResults sendWSResults(@Payload final ModelResults modelResults)
-    {
-    	/*
-    	String message = modelResults.getResults();
-    	
-    	if(message.equals(uuid)) //make a method in vs that will check the visualization folder for the given uuid id and return boolean
-    	{
-    		modelResults.setResults(vs.sendResults(getResults(uuid)));
-    		return modelResults;
-    	}
-    	*/
-    	return modelResults;
-    }
+	@MessageMapping("/results.ask")
+	@SendTo("/client/results.done")
+	public ModelResults sendMessage(@Payload final ModelResults results) throws Exception
+	{
+		String uuid = results.getUuid();
+		System.out.println("Sending...");
+		vService.getResults(uuid);
+		System.out.println("Sent");
+
+		return results;
+	}
+
+	@PostMapping("/demo")
+	public void connect(@RequestParam(value="uuid",required = true) String uuid) throws Exception
+	{
+		System.out.println(uuid + "REST API connected!");
+	}
+
+	@GetMapping(path="/demo",produces=MediaType.TEXT_HTML_VALUE)
+	public ModelAndView demoHtml() throws Exception
+	{
+		ModelAndView mv = new ModelAndView();
+
+		mv.setViewName("lifecycle/demo");
+
+		return mv;
+	}
 }
