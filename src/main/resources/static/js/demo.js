@@ -29,11 +29,12 @@ const onError = (error) => {
 }
 
 const onMessageReceived = (payload) => {
-    output.value += (payload.body);
+    output.value += (payload.body+"\n");
+    output.scrollTop = output.scrollHeight;
 }
 
 const onCompleteReceived = (payload) => {
-    output.value += ("Done receiving simulation messages.\n");
+    output.value += ("Received 10 simulation results.\n");
     stompClient.disconnect();
     // TODO: I thought this would trigger a disconnect on the server but it doesn't
 }
