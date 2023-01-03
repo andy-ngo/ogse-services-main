@@ -3,13 +3,16 @@ package com.lifecycle.services.visualization;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
+import com.lifecycle.services.websocket.WebSocketEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,11 +37,18 @@ import com.lifecycle.services.websocket.ModelResults;
 public class VisualizationController extends Controller {
 	
     private final VisualizationService vService;
+	private Scanner scan = null;
     
     @Autowired
     public VisualizationController(VisualizationService vService) {
 		this.vService = vService;
     }
+
+	@Autowired
+	private SimpMessageSendingOperations sendOps;
+
+	@Autowired
+	private WebSocketEventListener wSEventListener;
 	
 	@GetMapping(path="/api/visualization/{uuid}", produces=MediaType.APPLICATION_JSON_VALUE)
     public Entity getEntity(@PathVariable String uuid) throws Exception {
@@ -114,25 +124,37 @@ public class VisualizationController extends Controller {
 	public ModelResults sendMessage(@Payload final ModelResults results) throws Exception
 	{
 		String uuid = results.getUuid();
-		System.out.println("Sending...");
-		vService.getResults(uuid);
-		System.out.println("Sent");
+		wSEventListener.webSocketConnectListenerMessage("Sending...");
+
+		File resultFile = vService.getResults(uuid);
+		if(scan == null) scan = new Scanner(resultFile);
+
+		int i = 0;
+		while(scan.hasNextLine() && i < 10)
+		{
+			sendOps.convertAndSend("/client/results.send", scan.nextLine());
+			i++;
+		}
+
+		if(!scan.hasNextLine()) scan.close();
+		wSEventListener.webSocketConnectListenerMessage("Sent");
 
 		return results;
 	}
 
-	@PostMapping("/demo")
+	@PostMapping(path="/results")
 	public void connect(@RequestParam(value="uuid",required = true) String uuid) throws Exception
 	{
 		System.out.println(uuid + "REST API connected!");
+		wSEventListener.webSocketConnectListenerMessage(uuid + "REST API connected!");
 	}
 
-	@GetMapping(path="/demo",produces=MediaType.TEXT_HTML_VALUE)
-	public ModelAndView demoHtml() throws Exception
+	@GetMapping(path="/results",produces=MediaType.TEXT_HTML_VALUE)
+	public ModelAndView resultsHtml() throws Exception
 	{
 		ModelAndView mv = new ModelAndView();
 
-		mv.setViewName("lifecycle/demo");
+		mv.setViewName("lifecycle/results");
 
 		return mv;
 	}

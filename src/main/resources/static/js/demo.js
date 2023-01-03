@@ -31,10 +31,12 @@ const onError = (error) => {
 }
 
 const onMessageReceived = (payload) => {
-    printLine(payload.body);
+    printLine(payload.body+"\n");
+    //output.scrollTop = output.scrollHeight;
 }
 
 const onCompleteReceived = (payload) => {
+    //output.value += ("Received 10 simulation results.\n")
     printLine("Done receiving simulation messages.");
     stompClient.disconnect();
     // TODO: I thought this would trigger a disconnect on the server but it doesn't
@@ -48,6 +50,21 @@ const printLine = (line) => {
     console.innerHTML += `${line}<br>`;
     console.scrollTop = console.scrollHeight;
 }
+
+function read_value(id, name, mandatory) {
+    const data = new FormData();
+	var value = elem(id).value;
+
+	if (value.length == 0 && mandatory) throw new Error("Parameter " + name + " is mandatory.");
+
+	data.append(name, value)
+    return data;
+}
+
+function post(url, data) {
+	return fetch(url, { method: 'post', body: data });
+}
+
 /*
 function open_websocket(id){
     var uuid = elem(id).value;
@@ -73,20 +90,6 @@ socket.onerror = function(error){
 
 function handle_error(error) {
 	alert(error.toString());
-}
-
-function read_value(id, name, mandatory) {
-    const data = new FormData();
-	var value = elem(id).value;
-
-	if (value.length == 0 && mandatory) throw new Error("Parameter " + name + " is mandatory.");
-	
-	data.append(name, value)
-    return data;
-}
-
-function post(url, data) {
-	return fetch(url, { method: 'post', body: data });
 }
 
 function elem(id) {

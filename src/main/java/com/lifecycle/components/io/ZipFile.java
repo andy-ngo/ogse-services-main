@@ -66,7 +66,7 @@ public class ZipFile {
 	
 	public void WriteFull(String name, File source) throws IOException {
 		FileInputStream fis = new FileInputStream(source);
-		this.WriteFull(name, fis.readAllBytes());				
+		//this.WriteFull(name, fis.readAllBytes());
 		fis.close();        	
 	}
 	

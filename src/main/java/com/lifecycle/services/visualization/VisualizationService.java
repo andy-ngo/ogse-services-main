@@ -137,18 +137,8 @@ public class VisualizationService {
     }
     
     //method to stream results
-    public void sendResults(String uuid) throws Exception
-    { 
-    	File resultFile = getResults(uuid);
-		if(scan == null) scan = new Scanner(resultFile);
+    public void sendResults(File resultFile) throws Exception
+    {
 
-		int i = 0;
-		while(scan.hasNextLine() && i < 10)
-		{
-			sendOps.convertAndSend("/client/results.send", scan.nextLine());
-			i++;
-		}
-
-		if(!scan.hasNextLine()) scan.close();
     }
 }
