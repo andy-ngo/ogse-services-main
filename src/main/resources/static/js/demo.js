@@ -66,6 +66,21 @@ function post(url, data) {
 }
 
 /*
+use the frontnend to use a timer to keep requesting the results
+--> webworkers (similar to parallel)
+--> create a new webworker --> call in the html file
+    --> create a data structure to hold simulation results
+--> object my be held in memory
+--> each time a new time frame is
+--> main window on creates one frame
+--> in worker js create empty array, request from backend, till file done, when ever new frame is reached send array
+    --> start another empty array, keep this loop till it is finished
+--> as processing lines in backend, use a check to make sure that its a new time frame (has a single digit)
+--> on frontend have a way to show that the time frame has finished
+--> postMEssage in webworkers: it is used to communicate to the worker,
+read up on how streaming is done
+
+/*
 function open_websocket(id){
     var uuid = elem(id).value;
     socket = new WebSocket("wss://localhost:8080/demo/connect/" + uuid);
