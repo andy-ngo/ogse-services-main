@@ -1,7 +1,19 @@
-let stompClient;
-let output = document.getElementById("received");
+importScripts('https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js');// Stomp from 'https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js';
+importScripts('https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js');// SockJS from 'https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js';
+//let output = document.getElementById("received");
 
-document.querySelector("#connect").addEventListener("click", ev => {
+//maybe have webworker just do stompClient.send("/server/results.ask", {}, JSON.stringify({ uuid: uuid })); command
+//and possibly receive? but how would it do that when webworker thread can't access SockJS socket or Stomp libraries.
+self.onmessage = function(message) {
+    if (message.data.includes('connect')){
+        console.log(message);
+        //const socket = new SockJS('/demo-channel');
+        stompClient = Stomp.over(new SockJS('/demo-channel'));
+        stompClient.connect({}, onConnected, onError);
+    }
+}
+
+/*document.querySelector("#connect").addEventListener("click", ev => {
     output.value += "Opening connection...\n";
 
     let uuid = document.querySelector("#uuid").value;
@@ -12,7 +24,7 @@ document.querySelector("#connect").addEventListener("click", ev => {
         stompClient = Stomp.over(socket);
         stompClient.connect({}, onConnected, onError);
     }
-});
+});*/
 
 const onConnected = (ev) => {
     let uuid = document.querySelector("#uuid").value;
@@ -24,28 +36,31 @@ const onConnected = (ev) => {
 
 const onError = (error) => {
     stompClient.disconnect();
-    output.value += error.message;
-    console.style.color = 'red';
+    self.postMessage("Error: "+error.message);
+    //output.value += error.message;
+    //output.style.color = 'red';
 }
 
 const onMessageReceived = (payload) => {
-    output.value += (payload.body+"\n");
-    output.scrollTop = output.scrollHeight;
+    //output.value += (payload.body+"\n");
+    self.postMessage(payload.body+"\n");
+    //output.scrollTop = output.scrollHeight;
 }
 
 const onCompleteReceived = (payload) => {
-    output.value += ("Received 10 simulation results.\n");
+    //output.value += ("Received 10 simulation results.\n");
+    self.postMessage("Received 10 simulation results.\n");
     stompClient.disconnect();
-    // TODO: I thought this would trigger a disconnect on the server but it doesn't
 }
 
 const onConnectionClosed = (payload) => {
-    output.value += ("Connection closed.\n");
+    //output.value += ("Connection closed.\n");
+    self.postMessage("Connection closed. \n");
 }
 
 function read_value(id, name) {
     const data = new FormData();
-	var value = document.getElementById(id).value;
+	var value = 3;//document.getElementById(id).value;
 
 	if (value.length == 0) throw new Error("Parameter " + name + " is empty.");
 
