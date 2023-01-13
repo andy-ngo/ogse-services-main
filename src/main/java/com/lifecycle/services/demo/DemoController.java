@@ -26,22 +26,25 @@ public class DemoController extends Controller{
         this.dService = dService;
     }
 
+    @Autowired
+    public WebSocketEventListener wSEventListener;
+
     @MessageMapping("/results.ask")
     @SendTo("/client/results.done")
     public BasicMessage sendMessage(@Payload final BasicMessage message) throws Exception {
         String uuid = message.getUuid();
 
         if (uuid == null) throw new Exception("No uuid provided.");
-        System.out.println("Sending...");
+        wSEventListener.webSocketConnectListenerMessage("Sending...");
         dService.sendResults(uuid);
-        System.out.println("Sent");
+        wSEventListener.webSocketConnectListenerMessage("Sent");
 
         return message;
     }
 
 	@PostMapping("/demo")
-    public void connect(@RequestParam(value = "uuid", required = true) String uuid) throws Exception {    	
-		System.out.println(uuid + " REST API connected!");
+    public void connect(@RequestParam(value = "uuid", required = true) String uuid) throws Exception {
+        wSEventListener.webSocketConnectListenerMessage(uuid + " REST API connected!");
     }
 	
 	@GetMapping(path="/demo", produces = MediaType.TEXT_HTML_VALUE)

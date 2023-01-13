@@ -1,5 +1,7 @@
 let stompClient;
 let output = document.getElementById("received");
+const resultData = []; //this will be used as the data structure to hold the old set of results after each new time frame is reached
+const resultsArr = []; //this will be used to store the time frame of results
 
 document.querySelector("#connect").addEventListener("click", ev => {
     output.value += "Opening connection...\n";
@@ -12,6 +14,11 @@ document.querySelector("#connect").addEventListener("click", ev => {
         stompClient = Stomp.over(socket);
         stompClient.connect({}, onConnected, onError);
     }
+});
+
+document.querySelector("#continue").addEventListener("click", ev => {
+    output.value += "Loading time frame...\n";
+    onMessageReceived;
 });
 
 const onConnected = (ev) => {
@@ -29,8 +36,22 @@ const onError = (error) => {
 }
 
 const onMessageReceived = (payload) => {
-    output.value += (payload.body+"\n");
-    output.scrollTop = output.scrollHeight;
+    var results = payload.body.split("");
+    while(results !== null)
+    {
+        if(results.includes(";"))
+        {
+            resultsArr.push(results);
+        }
+        else
+        {
+            resultData.concat(resultArr);
+            postMessage(resultsArr);
+            output.scrollTop = output.scrollHeight;
+        }
+    }
+    //output.value += (payload.body +"\n");
+
 }
 
 const onCompleteReceived = (payload) => {

@@ -22,6 +22,12 @@ public class WebSocketEventListener {
     }
 
     @EventListener
+    public void webSocketConnectListenerMessage(final String message)
+    {
+        LOGGER.info(message);
+    }
+
+    @EventListener
     public void handleWebSocketDisconnectListener(final SessionConnectedEvent event)
     {
         BasicMessage message = BasicMessage.builder().build();
