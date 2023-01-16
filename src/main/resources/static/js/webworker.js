@@ -1,7 +1,8 @@
-const webWorker = new Worker('demo.js');
+const webWorker = new Worker('/static/js/demo.js');
 const resultData = [];
 const resultArr = [];
 
+/*
 import{
     onMessageReceived
 } from "./demo.js"
@@ -13,7 +14,15 @@ import{
 */
 function resultRunner()
 {
-    const results = onMessageReceived;
+    console.log("in webworker");
+    postMessage(results);
+    /*
+    export onMessageReceived = (e) -=>
+    {
+        const results = e.data;
+
+    }
+    /*
     const parsedResults = JSON.parse(results);
 
     if (results.includes(";"))

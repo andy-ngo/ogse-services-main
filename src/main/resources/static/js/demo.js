@@ -1,8 +1,21 @@
+
+importScript
 let stompClient;
-let output = document.getElementById("received");
+//let output = document.getElementById("received");
 const resultData = []; //this will be used as the data structure to hold the old set of results after each new time frame is reached
 const resultsArr = []; //this will be used to store the time frame of results
 
+onmessage = function(uuid)
+{
+    if(msg.data.includes('connect'))
+    {
+        const socket = new SockJS('/demo-channel');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, onConnected, onError);
+    }
+}
+
+/*
 document.querySelector("#connect").addEventListener("click", ev => {
     output.value += "Opening connection...\n";
 
@@ -20,9 +33,10 @@ document.querySelector("#continue").addEventListener("click", ev => {
     output.value += "Loading time frame...\n";
     onMessageReceived;
 });
+*/
 
 const onConnected = (ev) => {
-    let uuid = document.querySelector("#uuid").value;
+    //let uuid = document.querySelector("#uuid").value;
     stompClient.subscribe("/client/results.send", onMessageReceived);
     stompClient.subscribe("/client/results.done", onCompleteReceived);
     stompClient.subscribe("/client/connection.closed", onConnectionClosed);
@@ -31,11 +45,12 @@ const onConnected = (ev) => {
 
 const onError = (error) => {
     stompClient.disconnect();
-    output.value += error.message;
+    //output.value += error.message;
     console.style.color = 'red';
 }
 
 const onMessageReceived = (payload) => {
+    /*
     var results = payload.body.split("");
     while(results !== null)
     {
@@ -49,19 +64,20 @@ const onMessageReceived = (payload) => {
             postMessage(resultsArr);
             output.scrollTop = output.scrollHeight;
         }
-    }
-    //output.value += (payload.body +"\n");
+    }*/
+    output.value += (payload.body +"\n");
+
 
 }
 
 const onCompleteReceived = (payload) => {
-    output.value += ("Received 10 simulation results.\n");
+    //output.value += ("Received 10 simulation results.\n");
     stompClient.disconnect();
     // TODO: I thought this would trigger a disconnect on the server but it doesn't
 }
 
 const onConnectionClosed = (payload) => {
-    output.value += ("Connection closed.\n");
+    //output.value += ("Connection closed.\n");
 }
 
 function read_value(id, name) {
