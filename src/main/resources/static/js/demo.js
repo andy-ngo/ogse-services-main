@@ -1,5 +1,8 @@
-importScripts('https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js');// Stomp from 'https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js';
-importScripts('https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js');// SockJS from 'https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js';
+var exports = {}; //this line gets rid of DOMException stomp script failed to load error
+//import * as SockJS from 'https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js';
+//import * as Stomp from 'https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js';
+importScripts('https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js');
+importScripts('https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js');
 //let output = document.getElementById("received");
 
 //maybe have webworker just do stompClient.send("/server/results.ask", {}, JSON.stringify({ uuid: uuid })); command
@@ -7,8 +10,8 @@ importScripts('https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs
 self.onmessage = function(message) {
     if (message.data.includes('connect')){
         console.log(message);
-        //const socket = new SockJS('/demo-channel');
-        stompClient = Stomp.over(new SockJS('/demo-channel'));
+        const socket = new SockJS('/demo-channel');
+        stompClient = Stomp.over(socket);
         stompClient.connect({}, onConnected, onError);
     }
 }
