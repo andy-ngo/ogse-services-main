@@ -41,6 +41,22 @@ public class DemoService {
     
     //method to stream results
     public void sendResults(String uuid) throws Exception
+	{
+		File resultFile = getResults(uuid);
+		if (scan == null) scan = new Scanner(resultFile);
+
+		sendOps.convertAndSend("/client/results.send", scan.nextLine());
+		String line = scan.nextLine();
+		while (scan.hasNextLine() && line.contains(";")) {
+			sendOps.convertAndSend("/client/results.send", line);
+			line = scan.nextLine(); //due to this line once it reaches new timeframe that single digit is not sent through websocket
+		}
+		if(!scan.hasNextLine()) scan.close();
+	}
+
+
+	/* Old sendResults method which only sends 10 lines
+	public void sendResults(String uuid) throws Exception
     {
     	File resultFile = getResults(uuid);
 		if (scan == null) scan = new Scanner(resultFile);
@@ -53,4 +69,5 @@ public class DemoService {
 
 		if(!scan.hasNextLine()) scan.close();
     }
+	*/
 }
