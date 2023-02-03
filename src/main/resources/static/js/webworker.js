@@ -4,6 +4,7 @@ var exports = {}; //this line gets rid of DOMException stomp script failed to lo
 importScripts('https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js');
 importScripts('/static/js/stomp.js');
 var uuid;
+var results = [];
 
 //maybe have webworker just do stompClient.send("/server/results.ask", {}, JSON.stringify({ uuid: uuid })); command
 //and possibly receive?
@@ -31,12 +32,18 @@ const onError = (error) => {
 }
 
 const onMessageReceived = (payload) => {
-    self.postMessage(payload.body+"\n");
+    results.push(payload.body);
+    //self.postMessage(payload.body+"\n");
 }
 
 const onCompleteReceived = (payload) => {
-    self.postMessage("Received one timeframe of simulation results.\n");
+    //TODO: need to sort array since even though websocket is TCP connection not receiving lines in order
+    //TODO: (may be due to Stomp https://github.com/jmesnil/stomp-websocket/issues/108)
+    //console.log(results.sort(function(a, b){return a-b}));
+    self.postMessage(results);
+    //self.postMessage("Received one timeframe of simulation results.\n");
     stompClient.disconnect();
+    results = [];
 }
 
 const onConnectionClosed = (payload) => {

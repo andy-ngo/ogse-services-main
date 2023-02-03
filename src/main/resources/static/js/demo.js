@@ -28,7 +28,11 @@ webWorker.onmessage = function(message) {
         output.value += message.data;
         output.style.color = 'red';
     } else {
-        output.value += message.data;
+        for (let result of message.data) {
+            output.value += (result + "\n");
+        }
+        output.value += "Received one timeframe of simulation results.\n";
+        //output.value += message.data;
     }
     output.scrollTop = output.scrollHeight;
 }
