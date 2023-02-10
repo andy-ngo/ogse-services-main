@@ -21,6 +21,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
     {
         registry.setApplicationDestinationPrefixes("/server");
         registry.enableSimpleBroker("/client");
+        registry.setPreservePublishOrder(true);
     }
 
     @Override
@@ -29,4 +30,15 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
         registry.setSendBufferSizeLimit(1024 * 1024);
         registry.setSendTimeLimit(20000);
     }
+
+    /*
+    @Override
+    public void configureClientOutboundChannel(ChannelRegistration registration) {
+        registration.taskExecutor().corePoolSize(1);
+    }
+
+    @Override
+    public void configureClientInboundChannel(ChannelRegistration registration) {
+        registration.taskExecutor().corePoolSize(1);
+    }*/
 }

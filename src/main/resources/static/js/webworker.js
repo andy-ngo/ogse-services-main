@@ -3,6 +3,8 @@ var exports = {}; //this line gets rid of DOMException stomp script failed to lo
 //import * as Stomp from 'https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js';
 importScripts('https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js');
 importScripts('/static/js/stomp.js');
+importScripts('/static/js/ogse.js');
+
 var uuid;
 var results = [];
 
@@ -32,6 +34,17 @@ const onError = (error) => {
 }
 
 const onMessageReceived = (payload) => {
+    var x = new ogse.frame("test");
+    /*if (payload.body.indexOf(";") == -1){
+        results = new Frame(payload.body);
+    } else {
+        temp = payload.body.split(";");
+        if (temp[0].indexOf(",") == -1){
+            results.add_state_message(payload.body);
+        } else {
+            results.add_output_message(payload.body);
+        }
+    }*/
     results.push(payload.body);
     //self.postMessage(payload.body+"\n");
 }
@@ -41,7 +54,7 @@ const onCompleteReceived = (payload) => {
     //TODO: (may be due to Stomp https://github.com/jmesnil/stomp-websocket/issues/108)
     //console.log(results.sort(function(a, b){return a-b}));
     self.postMessage(results);
-    //self.postMessage("Received one timeframe of simulation results.\n");
+    //push entire frame to demo
     stompClient.disconnect();
     results = [];
 }
