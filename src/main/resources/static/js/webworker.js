@@ -1,15 +1,14 @@
 var exports = {}; //this line gets rid of DOMException stomp script failed to load error
-//import * as SockJS from 'https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js';
-//import * as Stomp from 'https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js';
 importScripts('https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js');
 importScripts('/static/js/stomp.js');
 importScripts('/static/js/ogse.js');
 
 var uuid;
-var results = [];
+var results;   //frame object
+var message;   //message object
+var timeframe; //the time that will be used as input for Frame object
+var first = 1; //represents whether this is first timeframe or not
 
-//maybe have webworker just do stompClient.send("/server/results.ask", {}, JSON.stringify({ uuid: uuid })); command
-//and possibly receive?
 self.onmessage = function(message) {
     if (message.data.includes('connect')){
         console.log(message);
@@ -21,6 +20,7 @@ self.onmessage = function(message) {
     }
 }
 
+//TODO: need to repeatedly use send command until entire log file is read or change DemoService
 const onConnected = (ev) => {
     stompClient.subscribe("/client/results.send", onMessageReceived);
     stompClient.subscribe("/client/results.done", onCompleteReceived);
@@ -34,29 +34,29 @@ const onError = (error) => {
 }
 
 const onMessageReceived = (payload) => {
-    var x = new ogse.frame("test");
-    /*if (payload.body.indexOf(";") == -1){
-        results = new Frame(payload.body);
-    } else {
-        temp = payload.body.split(";");
-        if (temp[0].indexOf(",") == -1){
-            results.add_state_message(payload.body);
-        } else {
-            results.add_output_message(payload.body);
+    if (payload.body.indexOf(";") == -1 && first == 1){ //first timeframe name received
+        timeframe = payload.body;
+        results = new ogse.frame(timeframe);
+        first = 0;
+    } else if (payload.body.indexOf(";") == -1 && first == 0){ //every other timeframe name received
+        timeframe = payload.body;
+    } else { //any message of timeframe received
+        message = new ogse.message(payload.body);
+        temp = payload.body.split(";"); //split message into array by ;
+        if (temp[0].indexOf(",") == -1){ //if first part of array doesn't have comma (state_message)
+            results.add_state_message(message);
+        } else { //if first part of array has comma (output_message)
+            results.add_output_message(message);
         }
-    }*/
-    results.push(payload.body);
-    //self.postMessage(payload.body+"\n");
+    }
 }
 
 const onCompleteReceived = (payload) => {
-    //TODO: need to sort array since even though websocket is TCP connection not receiving lines in order
-    //TODO: (may be due to Stomp https://github.com/jmesnil/stomp-websocket/issues/108)
-    //console.log(results.sort(function(a, b){return a-b}));
+    console.log(results);
     self.postMessage(results);
-    //push entire frame to demo
     stompClient.disconnect();
-    results = [];
+    results = new ogse.frame(timeframe); //create next frame object for next timeframe
+    message = null;
 }
 
 const onConnectionClosed = (payload) => {

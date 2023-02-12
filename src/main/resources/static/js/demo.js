@@ -1,3 +1,5 @@
+//import Frame from '/static/js/frame.js';
+//import Message from '/static/js/message.js';
 const webWorker = new Worker('/static/js/webworker.js');
 let output = document.getElementById("received");
 const results = [];
@@ -14,26 +16,8 @@ document.querySelector("#connect").addEventListener("click", ev => {
 });
 
 webWorker.onmessage = function(message) {
-    /*if(message.data.includes(';')) {
-        results[temp] = message.data;
-        temp++;
-    } else {
-        for (let i = 0; i < results.length; i++){
-            output.value += results[i];
-            output.scrollTop = output.scrollHeight;
-        }
-        results = [];
-    }*/
-    if(message.data.includes("error")) {
-        output.value += message.data;
-        output.style.color = 'red';
-    } else {
-        for (let result of message.data) {
-            output.value += (result + "\n");
-        }
-        output.value += "Received one timeframe of simulation results.\n";
-        //output.value += message.data;
-    }
+    output.value += message.data + "\n";
+    output.value += "Received one timeframe of simulation results.\n";
     output.scrollTop = output.scrollHeight;
 }
 

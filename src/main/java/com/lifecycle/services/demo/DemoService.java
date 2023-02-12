@@ -39,7 +39,7 @@ public class DemoService {
         return resultFile;
     }
     
-    //method to stream results
+    //Backend sends one timeframe and the time for the next timeframe
     public void sendResults(String uuid) throws Exception
 	{
 		File resultFile = getResults(uuid);
@@ -49,8 +49,9 @@ public class DemoService {
 		String line = scan.nextLine();
 		while (scan.hasNextLine() && line.contains(";")) {
 			sendOps.convertAndSend("/client/results.send", line);
-			line = scan.nextLine(); //due to this line once it reaches new timeframe that single digit is not sent through websocket
+			line = scan.nextLine();
 		}
+        sendOps.convertAndSend("/client/results.send", line);
 		if(!scan.hasNextLine()) scan.close();
 	}
 	/*
