@@ -10,7 +10,7 @@ var timeframe; //the time that will be used as input for Frame object
 var first = 1; //represents whether this is first timeframe or not
 
 self.onmessage = function(message) {
-    if (message.data.includes('connect')){
+    if(message.data.includes('connect')){
         console.log(message);
         let messageArr = message.data.split(',');
         uuid = messageArr[1];
@@ -41,11 +41,12 @@ const onMessageReceived = (payload) => {
     } else if (payload.body.indexOf(";") == -1 && first == 0){ //every other timeframe name received
         timeframe = payload.body;
     } else { //any message of timeframe received
-        message = new ogse.message(payload.body);
-        temp = payload.body.split(";"); //split message into array by ;
-        if (temp[0].indexOf(",") == -1){ //if first part of array doesn't have comma (state_message)
+        var split = payload.body.split(";").map(d => d.split(","));
+        if (split[0].length == 1){ //if first part of array doesn't have comma (state_message)
+            message = new ogse.state_message(split[0][0],split[1]);
             results.add_state_message(message);
         } else { //if first part of array has comma (output_message)
+            message = new ogse.output_message(split[0][0],split[0][1],split[1]);
             results.add_output_message(message);
         }
     }
@@ -54,7 +55,8 @@ const onMessageReceived = (payload) => {
 const onCompleteReceived = (payload) => {
     console.log(results);
     self.postMessage(results);
-    stompClient.disconnect();
+    //stompClient.disconnect();
+    stompClient.connect({}, onConnected, onError);
     results = new ogse.frame(timeframe); //create next frame object for next timeframe
     message = null;
 }
@@ -62,3 +64,7 @@ const onCompleteReceived = (payload) => {
 const onConnectionClosed = (payload) => {
     self.postMessage("Connection closed.\n");
 }
+//integrate native websockets into demo
+//then try to see if modules can work on webworker
+//monday talk about integration into the viewer
+//wednesday talk about things that can help with poster

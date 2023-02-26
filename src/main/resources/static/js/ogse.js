@@ -9,10 +9,16 @@ var ogse = {
 			state : []
 		}
 	},
-	message: function(model, value) {
+	output_message: function(model, port, value) {
 		this.model = model;
+		this.port = port;
 		this.value = value != undefined ? value : null;
-	}
+	},
+
+	state_message: function(model, value) {
+        this.model = model;
+        this.value = value != undefined ? value : null;
+    }
 }
 
 ogse.frame.prototype.add_message = function(message, type) {
