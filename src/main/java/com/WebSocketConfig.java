@@ -1,34 +1,15 @@
 package com;
 
+import com.lifecycle.services.websocket.WebSocketEventListener;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
-import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
-import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
-import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
+import org.springframework.web.socket.config.annotation.*;
 
 @Configuration
-@EnableWebSocketMessageBroker
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer
+@EnableWebSocket
+public class WebSocketConfig implements WebSocketConfigurer
 {
-	@Override
-    public void registerStompEndpoints(final StompEndpointRegistry registry)
-    {
-        registry.addEndpoint("/results-channel").withSockJS();
-    }
-
-    @Override
-    public void configureMessageBroker(final MessageBrokerRegistry registry)
-    {
-        registry.setApplicationDestinationPrefixes("/server");
-        registry.enableSimpleBroker("/client");
-    }
-    
-    @Override
-    public void configureWebSocketTransport(WebSocketTransportRegistration registry)
-    {
-    	registry.setMessageSizeLimit(500*1024);
-    	registry.setSendBufferSizeLimit(1024*1024);
-    	registry.setSendTimeLimit(20000);
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(new WebSocketEventListener(), "/user");
     }
 }
