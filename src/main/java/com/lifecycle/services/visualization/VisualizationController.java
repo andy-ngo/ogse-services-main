@@ -109,6 +109,7 @@ public class VisualizationController extends Controller {
         return mv;
 	}
 
+/*
 	@MessageMapping("/results.ask")
 	@SendTo("/client/results.done")
 	public ModelResults sendMessage(@Payload final ModelResults results) throws Exception
@@ -126,6 +127,8 @@ public class VisualizationController extends Controller {
 	{
 		System.out.println(uuid + "REST API connected!");
 	}
+
+ */
 
 	@GetMapping(path="/demo",produces=MediaType.TEXT_HTML_VALUE)
 	public ModelAndView demoHtml() throws Exception

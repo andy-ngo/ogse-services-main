@@ -2,38 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
         <link th:href="@{/static/css/main.css}" rel="stylesheet"/>
-        <!--
-        <script type="text/javascript" th:src="@{/static/js/demo.js}"></script>
-        <script th:inline="javascript">
-            function on_click(url) {			
-				try {					
-					post(url, read_value("uuid", "uuid", true)).catch(error => handle_error(error));
-                    open_websocket("uuid");
-				}
-				catch (error) {
-					alert(error.message);
-				}
-			}
-        </script>
-        -->
-        <style>
-            body > * 
-            {
-                margin: 8px;
-            }
-
-            #console
-            {
-                background-color:#f0f0f0;
-                width: 300px;
-                height: 500px;
-                padding: 6px;
-                border: solid thin silver;
-                overflow: auto;
-            }
-        </style>
+        <script src="/static/js/jquery-1.10.2.min.js"></script>
     </head>
-
     <body>
 
         <div class="ribbon">
@@ -43,31 +13,24 @@
 			<a href="http://localhost:8080/api/simulate">SIMULATION</a>
 		</div>
 
-        <span>
-            <input id="uuid" value="eaf30e82-6414-45a0-aa3f-e3e89ebe8ab0" />
-            <button id="connect">connect</button>
-        </span>
-        <div id="console"></div>
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-        <script src="../../static/js/demo.js"></script>
-
-        <!--
         <main>
             <div class="row">
-                <label>UUID: </label><input id="uuid" type="text"/>
+                <label> UUID: </label>
+                <input id="uuid" value="eaf30e82-6414-45a0-aa3f-e3e89ebe8ab0" />
             </div>
             <div class="row">
-				<button id="connect" th:attr="onclick=|on_click('http://localhost:8080/demo/connect')|">Connect</button>
-			</div>
-            <div class ="row">
-                <form>
-                    Received: <br>
-                    <textarea name="received" readonly>
-                    </textarea>
-                </form>
+                <button id="connect" type="button">Connect</button>
+                <button id="disconnect" type="button" disabled="disabled">Disconnect</button>
+            </div>
+            <div class="row">
+                <label> Received: </label>
+                <br>
+                <textarea id="resultsmessage" readonly></textarea>
+                <br>
+                <button id="send" type="submit">Send</button>
             </div>
         </main>
-        -->
+
+        <script type="module" src="/static/js/demo.js"></script>
+
     </body>

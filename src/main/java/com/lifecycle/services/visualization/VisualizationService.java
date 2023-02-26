@@ -27,9 +27,10 @@ import com.lifecycle.components.entities.Entity;
 import com.lifecycle.components.io.Folder;
 import com.lifecycle.components.io.UuidFolder;
 import com.lifecycle.components.io.ZipFile;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 @Service
-public class VisualizationService {
+public class VisualizationService{
 		
 	@Value("${app.folders.visualizations}")
 	private String APP_FOLDERS_VISUALIZATIONS;
@@ -42,11 +43,6 @@ public class VisualizationService {
 
 	}
 
-	@Autowired
-	private SimpMessageSendingOperations sendOps;
-
-	private Scanner scan = null;
-	
     public Entities<Entity> Entities() throws JsonParseException, JsonMappingException, IOException {
     	return new Entities<Entity>(APP_VISUALIZATIONS, Entity.class); 
     }
@@ -126,7 +122,7 @@ public class VisualizationService {
     	visualizations.Remove(uuid);
     	visualizations.Save();
     }
-    
+    /*
     //method to get the file
     public File getResults(String uuid) throws Exception
     {
@@ -135,10 +131,10 @@ public class VisualizationService {
 		resultFile = folder.file("messages.log");
         return resultFile;
     }
-    
+
     //method to stream results
     public void sendResults(String uuid) throws Exception
-    { 
+    {
     	File resultFile = getResults(uuid);
 		if(scan == null) scan = new Scanner(resultFile);
 
@@ -151,4 +147,5 @@ public class VisualizationService {
 
 		if(!scan.hasNextLine()) scan.close();
     }
+     */
 }
