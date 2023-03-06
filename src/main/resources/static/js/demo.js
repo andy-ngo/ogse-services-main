@@ -1,6 +1,10 @@
 var ws;
 const webWorker = new Worker('/static/js/webworker.js');
 
+//TODO: convert webworker to module
+//TODO: work on poster for poster fair and send draft to prof
+//TODO:
+
 function setConnected(connected) {
 	$("#connect").prop("disabled", connected);
 	$("#disconnect").prop("disabled", !connected);
