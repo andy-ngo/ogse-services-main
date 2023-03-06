@@ -1,5 +1,5 @@
-var ws;
-const webWorker = new Worker('/static/js/webworker.js');
+var count = 0;
+const webWorker = new Worker('/static/js/webworker.js', {type: 'module'});
 
 //TODO: convert webworker to module
 //TODO: work on poster for poster fair and send draft to prof
@@ -29,7 +29,9 @@ function sendData() {
 
 webWorker.onmessage = function(message) {
     //TODO: reading frame object messages instead
-	$("#resultsmessage").append(message + "\n");
+	$("#resultsmessage").append(count + ": " + message + "\n");
+	count = count + 1;
+	document.getElementById("resultsmessage").scrollTop = document.getElementById("resultsmessage").scrollHeight;
 }
 
 function stopWorker()

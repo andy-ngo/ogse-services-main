@@ -49,7 +49,10 @@ public class WebSocketHandler extends TextWebSocketHandler
 			line = scan.nextLine();
 		}
 		session.sendMessage(new TextMessage(line));*/
-		if (!scan.hasNextLine()) scan.close();
+		if (!scan.hasNextLine()) {
+			scan.close();
+			session.sendMessage(new TextMessage("EOF"));
+		}
 
 	}
 	

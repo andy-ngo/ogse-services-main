@@ -1,7 +1,7 @@
-//var exports = {}; //this line gets rid of DOMException stomp script failed to load error
-//importScripts('https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js');
-//importScripts('/static/js/stomp.js');
-importScripts('/static/js/ogse.js');
+//importScripts('/static/js/ogse.js');
+import MessageState from './message_state.js';
+import MessageOutput from './message_output.js';
+import Frame from './frame.js';
 
 var ws;
 
@@ -24,23 +24,27 @@ self.onmessage = function(message) {
         ws.onmessage = function(payload) {
             if (payload == "")
                 onError(new Error("No UUID provided."));
-            else {
-                //TODO: possibly change this for accepting exactly one single timeframe
+            else if (payload == "EOF"){
+                console.log(results);
+                self.postMessage(results);
+            } else {
                 if (payload.data.indexOf(";") == -1 && first == 1){ //first timeframe name received
                     timeframe = payload.data;
-                    results = new ogse.frame(timeframe);
+                    results = new Frame(timeframe);
                     first = 0;
                 } else if (payload.data.indexOf(";") == -1 && first == 0){ //every other timeframe name received
                     console.log(results);
                     self.postMessage(results);
-                    results = new ogse.frame(payload.data);
+                    timeframe = payload.data;
+                    results = new Frame(timeframe);
+                    ws.send(data);
                 } else { //any message of timeframe received
                     var split = payload.data.split(";").map(d => d.split(","));
                     if (split[0].length == 1){ //if first part of array doesn't have comma (state_message)
-                        message = new ogse.state_message(split[0][0],split[1]);
+                        message = new MessageState(split[0][0],split[1]);
                         results.add_state_message(message);
                     } else { //if first part of array has comma (output_message)
-                        message = new ogse.output_message(split[0][0],split[0][1],split[1]);
+                        message = new MessageOutput(split[0][0],split[0][1],split[1]);
                         results.add_output_message(message);
                     }
                 }
