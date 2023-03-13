@@ -1,9 +1,0 @@
-		map<string, json> m_${model_type};
-
-		std::cout << "Instantiating " << instances_set[${instances_index}].at("instances").size() << " model(s) of type ${model_type}..." << std::endl;
-		for (auto& j : instances_set[${instances_index}].at("instances")) {
-			string id = j.at("id").get<string>();
-			m_${model_type}[id] = j.at("params");
-			submodels_TOP.push_back(web::make_atomic_model<${model_type}, NDTime, json>(id, "${model_type}", move(m_${model_type}[id])));
-		}
-

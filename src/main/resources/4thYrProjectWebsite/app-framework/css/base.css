@@ -1,0 +1,144 @@
+@import url(https://fonts.googleapis.com/css?family=Varela+Round);
+
+html, body {
+	width:100%;
+	height:100%;
+	
+    font-family: sans-serif;
+    font-size: 11pt;
+	background : #f9f9f9;
+}
+
+body *:focus {
+	outline:none;
+}
+
+body main {
+	min-width: 600px;
+	margin: auto;
+}
+
+@media (min-width: 768px) {
+	body main {
+		width: 750px;
+	}
+}
+
+@media (min-width: 992px) {
+	body main {
+		width: 970px;
+	}
+}
+
+@media (min-width: 1200px) {
+	body main {
+		width: 1200px;
+	}
+}
+
+h1, h2, h3, table, input, select,
+.popup .popup-title {
+	font-family: 'Varela Round', sans-serif;
+	font-weight: normal;
+}
+
+h1, h2 {
+	margin: 0px;
+}
+
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.3em;
+}
+
+h2 a {
+	color: #198CFF;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+.popup button.close, 
+.popup .popup-title,
+.box-input-files i, 
+.box-input-files label, 
+a {
+    color: #0051A3;
+}
+
+a {
+    text-decoration: none;
+}
+
+select, input, button {
+	cursor: pointer;
+    height: 30px;
+    border-radius: 4px;
+}
+
+select, input {
+    border: solid thin silver;
+    font-size: 11pt;
+}
+
+button {
+    width: 30px;
+	background-color: #198CFF;
+    color: #eee;
+    font-size: 15px;
+    border: none;
+    border-bottom: solid 2px #0051A3;
+}
+
+button:disabled {
+    cursor: not-allowed;
+	background-color: #cacaca;
+    border-color: #7e7e7e;
+}
+
+button:not(:disabled):hover {
+  background: #0a54a2;
+  transition: all .2s ease;
+}
+
+button.inactive {
+	background-color:#51585e;
+}
+
+.popup {
+	background-color: #fff;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.centered-row {
+	text-align:center;
+}
+
+.centered-row > * {
+	display:inline-block; 
+}
+
+/* Wait spinner styling */
+.wait {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.wait img{ 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

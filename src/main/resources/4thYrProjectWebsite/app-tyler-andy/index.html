@@ -1,0 +1,44 @@
+<!--
+/********************************************************
+ * Author:  Bruno St-Aubin, 2017-2019.
+ * Contributors: Omar Hesham, Omar Kawach, Fernando Loor,
+ *				 Shreya Taneja, Jose Franco, Eli Yammine, 
+ *				 Majed Nayef
+  * Advanced Real-Time Simulation Lab.
+ * Carleton University, Ottawa, Canada.​​
+ * License: GNU General Public License v3.0
+ *
+ * Project: Web-based DEVS Simulation Viewer
+ */
+-->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="user-scalable=no" />
+		<meta name="description" content="This web application is a viewer for DEVS simulation log files">
+		<meta name="author" content="Bruno St-Aubin">
+		
+		<title>DEVS Simulation Viewer | ARS Lab | Carleton University</title>
+		
+		<link rel='shortcut icon' href='./assets/favicon.ico'>
+		<link rel="stylesheet" href="../app-references/font-awesome-all-5.7.2.css">
+		<link rel="stylesheet" href="../app-references/ol/ol.css" type="text/css">
+		<link rel="stylesheet" href="../app-references/ol/ol-ext.min.css" type="text/css"/>
+		<link rel="stylesheet" href="../app-framework/css/base.css">
+		<link rel="stylesheet" href="../app-framework/css/ui.css">
+		<link rel="stylesheet" href="../app-framework/css/widgets.css">
+		<link rel="stylesheet" href="./application.css">
+		
+		<script src="../app-references/ol/ol.js" type="text/javascript" ></script>
+		<script src="../app-references/ol/ol-ext.min.js" type="text/javascript"></script>
+		<script type='module'>
+			import App from './application.js';
+
+			var viewer = new App(document.body);
+			
+			viewer.load();
+		</script>
+	</head>
+	<body class="embed gis"></body>
+</html>

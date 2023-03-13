@@ -1,0 +1,6 @@
+{
+	"URLs": {
+		"logs": "http://localhost:81/logs-ready",
+		"viz": "http://localhost/ogse-files/visualizations/"
+	}
+}

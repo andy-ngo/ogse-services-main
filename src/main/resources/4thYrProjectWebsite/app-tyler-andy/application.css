@@ -1,0 +1,325 @@
+.output-message {
+	display:none;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Varela+Round);
+
+html {
+    font-family: sans-serif;
+    font-size: 11pt;
+	background : #f9f9f9;
+}
+
+html, 
+body.embed, 
+body.embed main, 
+body.embed .view, 
+body.embed .map-container, 
+body.embed .map {
+	/*
+	width: 100%;
+	height: 100%;    
+	padding: 0;
+    margin: 0;
+	*/
+	overflow-y:hidden;
+}
+
+body.embed.gis, 
+body.embed.gis main, 
+body.embed.gis .view, 
+body.embed.gis .map-container, 
+body.embed.gis .map {
+	width: 100%;
+	height: 100%;    
+	padding: 0;
+    margin: 0;
+}
+
+body.embed,
+body.embed select, 
+body.embed .popup {
+	font-family: 'Varela Round', sans-serif;
+    font-size: 11pt;
+}
+
+body.embed button {
+	background-color: rgba(0,60,136,.5);
+}
+
+body.embed button:hover {
+	background-color: rgba(0,60,136,.7);
+}
+
+.playback, .custom-control {
+    background: rgba(255,255,255,.8);
+}
+
+.playback {
+	position: absolute;
+	/*bottom: 0px;*/
+    left: 50%;
+    transform: translate(-50%,0);
+    padding: 2px;
+	border-radius: 0px;
+}
+
+.gis .playback {
+    bottom: 10px;
+}
+
+body.embed.gis .playback {
+    bottom: 8px;
+}
+
+.playback > * {
+    margin: 2px;
+}
+
+
+.playback button {
+	height: 30px;
+    width: 30px;
+    color: #eee;
+    font-size: 15px;
+    border: none;
+    border-bottom: solid 2px #0051A3;
+    cursor: pointer;
+}
+
+.playback button:disabled {
+	background-color:lightgray;
+    border-bottom: solid 2px darkgray;
+}
+
+.playback .controls button:not(:last-child) {
+    border-right-color: #eee;
+}
+
+
+
+
+
+
+/* TODO: THIS IS A LOT OF CSS FOR ONE WIDGET, SOME NEEDS TO MOVE TO API-WEB-DEVS */
+.loader-widget {
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loader-widget .box-inner {
+	height: 400px;
+	text-align:center;
+}
+
+.loader-widget .box-input-files .box-inner:hover {
+  background: #eff7ff;
+  border-color: #0051a3;
+  transition: all .2s ease;
+}
+
+.loader-widget .box-input-files .files-container .file:hover {
+  background: #eff7ff;
+}
+
+.loader-widget .box-input-files .box-inner {
+    background: #fff;
+	border-color: #198CFF;
+}
+
+.loader-widget .box-input-files i, 
+.loader-widget .box-input-files label {
+    font-weight: bold;
+}
+
+.loader-widget .box-input-files i, 
+.loader-widget .box-input-files label {
+    color: #0051A3;
+}
+
+.loader-widget button {
+	height: 30px;
+    background-color: #198CFF;
+    color: #eee;
+    font-size: 15px;
+    border: none;
+    border-bottom: solid 2px #0051A3;
+    cursor: pointer;
+}
+
+.loader-widget, .button-column {
+	vertical-align: top;
+	margin : 15px 5px;
+}
+
+.loader-widget .clear,
+.loader-widget .parse {
+    display:inline-block;
+}
+
+.loader-widget .clear {
+    border-bottom: solid 2px #980000;
+	background:#fd6e6e;
+    width: 29%;
+}
+
+.loader-widget .clear:hover {
+	background:#980000;
+}
+
+.loader-widget .parse {
+    width: 69%;
+	margin-top : 10px;
+	margin-left : 2%;
+}
+
+.loader-widget button:disabled {
+    cursor: not-allowed;
+	background-color: #cacaca;
+    color: #7e7e7e;
+    border-color: #7e7e7e;
+}
+
+.loader-widget button:not(:disabled):hover {
+  background: #0051A3;
+  transition: all .2s ease;
+}
+
+.view {
+    display: inline-block;
+    transform: translate(-50%, 0px);
+    left: 50%;
+    position: relative;
+}
+
+/* GIS-DEVS stuff */
+.ol-control {
+	background-color: rgba(255,255,255,.7);
+	border-radius: 0px;
+}
+
+.ol-control button {
+	border-radius:0px;
+}
+
+.ol-control:hover {
+	background-color: rgba(255,255,255,.9);
+}
+
+.ol-control.ol-layerswitcher:not(.ol-collapsed), 
+.ol-control.ol-layerswitcher:not(.ol-collapsed):hover{
+	background-color: rgba(255,255,255,0.85);
+}
+
+.ol-control.ol-layerswitcher .panel {
+	background-color:transparent;
+}
+
+.ol-scale-line {
+	background-color: rgba(0,60,136,.5);
+}
+
+.ol-viewport, .ol-control button {
+	cursor: pointer;
+}
+
+.ol-popup-content {
+    width: 200px;
+}
+
+.ol-popup .ol-popup-content ul {
+    padding: 0;
+}
+
+.ol-popup .ol-popup-content hr {
+	border: none;
+    border-bottom: solid thin silver;
+}
+
+.ol-popup .ol-popup-content ul {
+    margin: 10px;
+    list-style: none;
+}
+
+.ol-popup .ol-popup-content .title {
+	font-size: 1.2em;
+    margin-bottom: 2px;
+    font-weight:bold;
+}
+
+.ol-popup .ol-popup-content ul > li:first-child {
+    font-weight:bold;
+}
+
+.ol-layerswitcher>button {
+	background-color: rgba(0,60,136,.5);
+	font-size: 1.14em;
+}
+
+.ol-layerswitcher .panel label,
+.ol-layerswitcher .panel input {
+	cursor: pointer;
+}
+
+.ol-layerswitcher .panel .ol-layer-group {
+	padding-top : 8px;
+}
+
+.ol-layerswitcher .panel .layerup,
+.ol-layerswitcher .panel .ol-layer-group .layerswitcher-opacity,
+.ol-layerswitcher .panel .ol-layer-tile .layerswitcher-opacity {
+	display:none;
+}
+
+.variable-select-container {
+    position: absolute;
+    left: 3em;
+    top: .5em;
+}
+
+.variable-select-container > * {
+	margin: 4px;
+}
+
+.variable-select-container select {
+	cursor:pointer;
+}
+
+.ol-control.ol-full-screen {
+	left: .5em;
+    top: 4.5em;
+	right: unset;
+	bottom: unset;
+	
+}
+
+.ol-control.ol-layerswitcher {
+    left: .5em;
+    bottom: 2.5em;
+    top: unset;
+    right: unset;
+}
+
+/* legend */
+.ol-control.ol-legend-container {	
+    position: absolute;
+    right: .5em;
+    top: .5em;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+	padding:10px;
+}
+
+.ol-control.ol-legend-container {
+	background-color: rgba(255,255,255,.85);
+}
+
+.ol-control.ol-legend-container .ol-legendImg {
+	pointer-events:none;	
+    position: absolute;
+}
