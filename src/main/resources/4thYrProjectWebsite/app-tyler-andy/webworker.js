@@ -1,5 +1,5 @@
-import MessageState from '../app-framework/data_structures/simulation/message_state.js';
-import MessageOutput from '../app-framework/data_structures/simulation/message_output.js';
+import MessageState from '../app-framework/data_structures/simulation/message-state.js';
+import MessageOutput from '../app-framework/data_structures/simulation/message-output.js';
 import Frame from '../app-framework/data_structures/simulation/frame.js';
 
 var ws;
@@ -22,48 +22,21 @@ self.onmessage = function(message) {
             } else {
                 console.log(payload.data);
                 var split = payload.data.split(";");
-                if (split[0] == "time"){ //skip definition of csv columns line
-                    continue;
-                } else if (split[0] != timeframe && first == 1){ //first timeframe
+                if (first == 1){ //first timeframe
                     timeframe = split[0];
                     results = new Frame(timeframe);
                     first = 0;
+                    addMessage(payload.data);
                 } else if (split[0] != timeframe && first == 0) { //new timeframe
                     console.log(results);
                     self.postMessage(results);
                     timeframe = split[0];
                     results = new Frame(timeframe);
+                    addMessage(payload.data);
                     //ws.send(logFileName); //this line will repeat until entire file is complete
                 } else {
-                    var message;
-                    if (split[3]) { //port_name exists (output_message)
-                        message = new MessageOutput(split[2], split[3], split[4]);
-                        results.add_output_message(message);
-                    } else { //state_message
-                        message = new MessageState(split[2], split[4]);
-                        results.add_state_message(message);
-                    }
+                    addMessage(payload.data);
                 }
-//                if (payload.data.indexOf(";") == -1 && first == 1){ //first timeframe name received
-//                    timeframe = payload.data;
-//                    results = new Frame(timeframe);
-//                    first = 0;
-//                } else if (payload.data.indexOf(";") == -1 && first == 0){ //every other timeframe name received
-//                    console.log(results);
-//                    self.postMessage(results);
-//                    timeframe = payload.data;
-//                    results = new Frame(timeframe);
-//                    ws.send(data);
-//                } else { //any message of timeframe received
-//                    var split = payload.data.split(";").map(d => d.split(","));
-//                    if (split[0].length == 1){ //if first part of array doesn't have comma (state_message)
-//                        message = new MessageState(split[0][0],split[1]);
-//                        results.add_state_message(message);
-//                    } else { //if first part of array has comma (output_message)
-//                        message = new MessageOutput(split[0][0],split[0][1],split[1]);
-//                        results.add_output_message(message);
-//                    }
-//                }
             }
         }
     } else if(message.data.includes('disconnect')) {
@@ -72,7 +45,23 @@ self.onmessage = function(message) {
     }
 }
 
-const onError = (error) => {
-    stompClient.disconnect();
-    self.postMessage("Error: "+error.message);
+const addMessage = (data) => { //TODO: need to figure out how to organize new csv file into output and state message
+    var split = data.split(";");
+    var message;
+    if (split[3]) { //port_name exists (output_message)
+        message = new MessageOutput(split[2], split[3], split[4]);
+        results.add_output_message(message);
+    } else { //state_message
+        message = new MessageState(split[2], split[4]);
+        results.add_state_message(message);
+    }
 }
+
+//var split = payload.data.split(";").map(d => d.split(","));
+//if (split[0].length == 1){ //if first part of array doesn't have comma (state_message)
+//    message = new MessageState(split[0][0],split[1]);
+//    results.add_state_message(message);
+//} else { //if first part of array has comma (output_message)
+//    message = new MessageOutput(split[0][0],split[0][1],split[1]);
+//    results.add_output_message(message);
+//}

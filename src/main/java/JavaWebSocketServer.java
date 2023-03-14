@@ -52,21 +52,30 @@ public class JavaWebSocketServer extends WebSocketServer {
         String line =  scan.nextLine();
         String[] split = line.split(";");
         currentTime = split[0];
+        if (currentTime.equals("time")){ //don't send first line of csv with column definitions
+            line = scan.nextLine();
+            split = line.split(";");
+            currentTime = split[0];
+        }
+        System.out.println("Timeframe:" + currentTime);
         conn.send(line);
+        System.out.println(line);
         do {
             line = scan.nextLine();
             conn.send(line);
+            System.out.println(line);
             split = line.split(";");
-            if (currentTime != split[0]){
+            if (!currentTime.equals(split[0])){
                 System.out.println("One timeframe sent");
                 break;
             } else {
                 System.out.println(line);
             }
-        } while(scan.hasNextLine() && line.contains(";")); //need to change condition
+        } while(scan.hasNextLine()); //need to change condition
 
         if (!scan.hasNextLine()) {
             scan.close();
+            System.out.println("EOF");
             conn.send("EOF");
         }
     }
