@@ -60,9 +60,9 @@ self.onmessage = function(message) {
 const addMessage = (data) => { //TODO: need to figure out how to organize new csv file into output and state message
     var split = data.split(";").map(d => d.split(","));
     if (split[3] != "") { //port_name exists (output_message)
-        frame.output_messages.push([split[2], split[3], split[4]]);
+        frame.output_messages.push([split[2], split[3], split[4].map(v => +v)]);
     } else { //state_message
-        frame.state_messages.push([split[2], split[4]]);
+        frame.state_messages.push([split[2], split[4].map(v => +v)]);
     }
 }
 

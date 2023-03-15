@@ -26,7 +26,7 @@ export default class GIS extends Evented {
 		
 		this.map = new Map(container, [basemap1, basemap2]);
 		
-		Promise.all([this.map.ready(), this.get_layer_json()]).then(this.on_map_ready.bind(this));
+		Promise.all([this.get_layer_json()]).then(this.on_map_ready.bind(this));
 		
 		if (options.view) this.map.set_view(options.view.center, options.view.zoom);
 

@@ -49,43 +49,47 @@ export default class AppEmbed extends Application {
 		// worry about progressively loading and viewing.
         const webWorker = new Worker('./webworker.js', {type: 'module'});
         webWorker.postMessage('connect,' + parser.files.log.name);
-        var messages = [];
-        webWorker.onmessage = function(message) {
-            if (message.data.type == "frame-ready"){
-                var model;
-                var port;
-                var frame = new Frame(message.data.time);
-                message.data.state_messages.forEach(m => {
-                    model = simulation.models.get(m[0]);
+        
+		var messages = [];
+		
+        webWorker.onmessage = m => {
+            if (m.data.type == "frame-ready"){
+                var frame = new Frame(m.data.time);
+				
+                m.data.state_messages.forEach(m => {
+                    var model = simulation.models.get(m[0]);
                     frame.add_state_message(new MessageState(model, m[1]));
                 });
-                message.data.output_messages.forEach(m => {
-                    model = simulation.models.get(m[0]);
-                    port = model.port.get(m[1]);
+				
+                m.data.output_messages.forEach(m => {
+                    var model = simulation.models.get(m[0]);
+                    var port = model.port.get(m[1]);
                     frame.add_output_message(new MessageOutput(model, port, m[2]));
                 });
+				
                 messages.push(frame);
-            } else if (message.data.type == "simulation-ready"){
-                initialize(messages); //TODO: this.elems is undefined when application.js finishes loading so need to stall it?
+            } 
+			
+			else if (m.data.type == "simulation-ready"){
+                this.initialize(simulation, viz, files, messages); //TODO: this.elems is undefined when application.js finishes loading so need to stall it?
             }
         }
-		//var messages = await parser.parse_messages(simulation);
-		// Finish initialization of the simulation object.
-        function initialize(messages) {
-            simulation.initialize(messages, viz.cache);
+	}
 
-            // Instantiate the viewer widget for maps.
-            // TODO: I need to fix the wGis widget to receive messages as they are loaded through websockets.
-            // TODO: This involves precalculating the simulation stats used to render the map. It will also
-            // TODO: require that the playback widget be updated as messages are coming in.
-            var view = new wGIS(this.elems.view, simulation, viz, files);
+	initialize(simulation, viz, files, messages) {
+		simulation.initialize(messages, viz.cache);
 
-            // Hook up events on the viewer widget.
-            view.on("ready", ev => {
-                this.elems.playback.recorder = new Recorder(view.canvas);
-                this.elems.playback.initialize(simulation, viz);
-            });
-        }
+		// Instantiate the viewer widget for maps.
+		// TODO: I need to fix the wGis widget to receive messages as they are loaded through websockets.
+		// TODO: This involves precalculating the simulation stats used to render the map. It will also
+		// TODO: require that the playback widget be updated as messages are coming in.
+		var view = new wGIS(this.elems.view, simulation, viz, files);
+
+		// Hook up events on the viewer widget.
+		view.on("ready", ev => {
+			this.elems.playback.recorder = new Recorder(view.canvas);
+			this.elems.playback.initialize(simulation, viz);
+		});
 	}
 
 	html() {
