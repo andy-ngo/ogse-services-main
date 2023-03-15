@@ -123,17 +123,21 @@ export default class Simulation extends Evented {
 		for (var i = 0; i < frames.length; i++) {
 			var add = frames[i];
 			
-			if (this.frames.has(add)) throw new Error("Cannot add frame to simulation, it already exists.");
-		
-			if (i > 0) add.link_previous(this.cache.last());
-			
-			this.cache.add_frame(add, this.frames.length);
-			this.frames.add(add);
+			this.add_frame(add);
 		}
 		
 		this.state = this.cache.first().clone();
 	}
-	
+
+	add_frame(frame) {
+	    if (this.frames.has(frame)) throw new Error("Cannot add frame to simulation, it already exists.");
+
+        if (i > 0) frame.link_previous(this.cache.last());
+
+        this.cache.add_frame(frame, this.frames.length);
+        this.frames.add(frame);
+	}
+
     /**
      * Returns the state of the model for the frame at the position identified by the index provided.
      * @param {number} index - the position of the frame for which to retrieve the state.
