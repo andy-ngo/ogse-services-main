@@ -123,7 +123,12 @@ export default class Simulation extends Evented {
 		for (var i = 0; i < frames.length; i++) {
 			var add = frames[i];
 			
-			this.add_frame(add);
+			if (this.frames.has(add)) throw new Error("Cannot add frame to simulation, it already exists.");
+
+            if (i > 0) add.link_previous(this.cache.last());
+
+            this.cache.add_frame(add, this.frames.length);
+            this.frames.add(add);
 		}
 		
 		this.state = this.cache.first().clone();

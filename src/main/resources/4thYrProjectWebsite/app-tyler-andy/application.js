@@ -49,6 +49,7 @@ export default class AppEmbed extends Application {
 		// worry about progressively loading and viewing.
         const webWorker = new Worker('./webworker.js', {type: 'module'});
         webWorker.postMessage('connect,' + parser.files.log.name);
+        var messages = [];
         webWorker.onmessage = function(message) {
             if (message.data.type == "frame-ready"){
                 var model;
@@ -63,29 +64,28 @@ export default class AppEmbed extends Application {
                     port = model.port.get(m[1]);
                     frame.add_output_message(new MessageOutput(model, port, m[2]));
                 });
-                simulation.add_frame(frame);
+                messages.push(frame);
             } else if (message.data.type == "simulation-ready"){
-                initialize();
+                initialize(messages); //TODO: this.elems is undefined when application.js finishes loading so need to stall it?
             }
         }
 		//var messages = await parser.parse_messages(simulation);
-	}
+		// Finish initialization of the simulation object.
+        function initialize(messages) {
+            simulation.initialize(messages, viz.cache);
 
-    // Finish initialization of the simulation object.
-	initialize() {
-	    simulation.initialize(messages, viz.cache);
+            // Instantiate the viewer widget for maps.
+            // TODO: I need to fix the wGis widget to receive messages as they are loaded through websockets.
+            // TODO: This involves precalculating the simulation stats used to render the map. It will also
+            // TODO: require that the playback widget be updated as messages are coming in.
+            var view = new wGIS(this.elems.view, simulation, viz, files);
 
-        // Instantiate the viewer widget for maps.
-        // TODO: I need to fix the wGis widget to receive messages as they are loaded through websockets.
-        // TODO: This involves precalculating the simulation stats used to render the map. It will also
-        // TODO: require that the playback widget be updated as messages are coming in.
-        var view = new wGIS(this.elems.view, simulation, viz, files);
-
-        // Hook up events on the viewer widget.
-        view.on("ready", ev => {
-        	this.elems.playback.recorder = new Recorder(view.canvas);
-        	this.elems.playback.initialize(simulation, viz);
-        });
+            // Hook up events on the viewer widget.
+            view.on("ready", ev => {
+                this.elems.playback.recorder = new Recorder(view.canvas);
+                this.elems.playback.initialize(simulation, viz);
+            });
+        }
 	}
 
 	html() {
