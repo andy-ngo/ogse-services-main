@@ -6,6 +6,8 @@ Use Windows IIS Manager to host [4thYrProjectWebsite folder](/src/main/resources
 
 Change line 41 of [JavaWebSocketServer.java](/src/main/java/JavaWebSocketServer.java) such that the folder path is correct with your system. 
 
+Add [libraries](/src/main/java/lib) necessary to run file into project structure. File->Project Structure->Modules->Dependencies->Add the 2 jar files.
+
 Run JavaWebSocketServer.java to act as the backend server that communicates the data through a websocket connection.
 
 Open browser and enter following URL to see final product. 
