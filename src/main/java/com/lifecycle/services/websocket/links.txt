@@ -1,6 +1,0 @@
-https://www.baeldung.com/websockets-spring
-https://docs.oracle.com/javaee/7/tutorial/websocket007.htm
-https://developer.okta.com/blog/2019/10/09/java-spring-websocket-tutorial
-https://www.youtube.com/watch?v=U4lqTmFmbAM
-https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/HomeWebsocket/WebsocketHome.html#:~:text=Introduction%20to%20the%20WebSocket%20API%20in%20Java%20EE%207,-Introduced%20as%20part&text=By%20maintaining%20a%20constant%20connection,the%20underlying%20TCP%2FIP%20connection.
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse

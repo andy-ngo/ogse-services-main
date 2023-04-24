@@ -1,8 +1,0 @@
-		std::cout << "Building " << relations_set[${relations_index}].at("links").size() << " coupling(s) from ${source_port}@${source_model_type} to ${destination_port}@${destination_model_type}..." << std::endl;
-		for (auto& l : relations_set[${relations_index}].at("links")) {
-			string id_from = l[0];
-			string id_to = l[1];
-			
-			ics_TOP.push_back(web::make_IC<${source_port}, ${destination_port}>(id_from, id_to));
-		}
-

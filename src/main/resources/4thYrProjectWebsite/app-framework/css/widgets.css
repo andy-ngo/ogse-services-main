@@ -1,0 +1,343 @@
+/* Settings widget styling */
+.settings-widget {
+    min-width: 400px;
+}
+
+.settings-widget .column-50 {
+	width: 50%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.settings-widget button.image-button {
+    height: 24px;
+    width: 24px;
+}
+
+.settings-widget .settings-group-label {
+    margin: 15px 0px 15px 0px;
+}
+
+.settings-widget .settings-group {
+	margin-left: 15px;
+}
+
+.settings-widget .settings-line {
+	margin-top: 5px;
+}
+
+.settings-widget .settings-line > * {
+	display: inline-block;
+}
+
+.settings-widget .settings-label {
+	width:80px;
+}
+
+.settings-widget .settings-value {
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+.settings-widget input[type="number"] {
+	width: 60px;
+}
+
+.settings-widget input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+.settings-widget label[for] {
+	cursor: pointer;
+}
+
+/* Layers widget styling */
+.layers-widget {
+    width: 400px;
+}
+
+.layers-widget table {
+    width: 100%;
+}
+
+.layers-widget table td {
+	text-align: center;
+}
+
+.layers-widget .settings-title-container select,
+.layers-widget table .grid-styles select,
+.layers-widget table .grid-z select {
+    width: 50px;
+}
+
+.layers-widget .settings-title-container > * {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.layers-widget button.settings-button {
+    width: 140px;
+}
+
+.layers-widget .styles-color button,
+.layers-widget button.image-button {
+    padding: 0;
+	background: none;
+	border: none;
+	display: inline-block
+}
+
+.layers-widget button.image-button:not(:disabled):hover {
+	background: none;
+}
+
+.layers-widget button.image-button img {
+	width: 24px;
+	height: 24px;
+	vertical-align: middle;
+}
+
+.layers-widget table tr:only-child button.button-delete {
+	display: none;
+}
+
+.layers-widget table .select-fields {
+    position: relative;	
+}
+
+.layers-widget table .select-fields .select-fields-input {
+    cursor: pointer;
+    height: 30px;
+    border-radius: 4px 4px 0px 0px;
+}
+
+.layers-widget table .select-fields.collapsed .select-fields-input {
+    border-radius: 4px;
+}
+
+.layers-widget table .select-fields .select-fields-dropdown {
+    border: solid thin silver;
+    background: white;
+	text-align: left;
+    box-sizing: border-box;
+    padding: 0px;
+}
+
+.layers-widget table .select-fields .select-fields-dropdown {
+    position: absolute;
+	list-style-type: none;
+    margin: 0;
+    z-index: 1000;
+    width: 100%;
+    border-radius: 0px 0px 4px 4px;
+    box-shadow: -2px 2px 4px 0px #7777778c;
+    border-top: none;
+}
+
+.layers-widget table .select-fields.collapsed .select-fields-dropdown {
+	display: none;
+}
+
+.layers-widget table .select-fields .select-fields-dropdown .select-fields-dropdown-item {
+	padding: 4px;
+	cursor: pointer;
+}
+
+.layers-widget table .select-fields .select-fields-dropdown .select-fields-dropdown-item:hover {
+	background-color: #ecf5fe;
+}
+
+.layers-widget table .styles-start input,
+.layers-widget table .styles-end input {
+    width: 125px;
+}
+
+.layers-widget table .styles-color button {
+	vertical-align: middle;
+}
+
+.layers-widget .styles,
+.layers-widget .layers {
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.layers-widget .layers {
+	max-height: 150px;
+}
+
+.layers-widget .styles .style {
+	max-height: 300px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+/* Diagram widget styling */
+.diagram-widget {
+	width: 100%;
+	height: 100%;
+}
+
+.diagram-widget svg {
+    pointer-events: visible;
+	cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.diagram-widget path {
+	pointer-events:none;
+}
+
+/* Grid widget styling */
+.grid-widget, .grid-widget .grid-canvas-container {
+	width: 100%;
+	height: 100%;
+    box-sizing: border-box;
+}
+
+.grid-widget .grid-canvas-container canvas {
+	cursor: pointer;
+}
+
+/* Loader widget styling */
+.loader-widget .box {
+    width: 100%;
+}
+
+.loader-widget .save {
+	margin-top: 10px;
+    width: 100%;
+}
+
+.loader-widget .options-container {
+    text-align: center;
+}
+
+.loader-widget .options-container > * {
+	display: inline-block;
+    margin-bottom: 10px;
+    vertical-align: top;
+}
+
+.loader-widget .options-container .option {
+	cursor: pointer;
+}
+
+.loader-widget .options-column {	
+    width: 50%;
+}
+
+.loader-widget .options-column > * {
+	display: block;
+	text-align: left;
+    padding: 1px;
+}
+
+.loader-widget .options-column > *:first-child {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #198CFF;
+    padding-bottom: 4px;
+}
+
+.loader-widget .options-column > *:not(:first-child) {
+    padding-left: 10px;
+}
+
+.loader-widget button.clear:not(:disabled):hover {
+  background: #980000;
+}
+
+/* Server loader widget styling */
+.server-loader-widget ul {
+    padding: 0;
+    margin: 0;
+    border: dotted thin;
+}
+  
+.server-loader-widget ul li {
+    padding: 6px;
+    list-style-type: none;
+    transition: all .2s ease;
+}
+
+.server-loader-widget ul li {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.server-loader-widget ul li:nth-child(even) {
+    background: #eeeeee;
+}
+  
+.server-loader-widget ul li:hover {
+    background: #ccc;
+}
+
+/* Linker Widget styling */
+.linker-widget {
+    width: 1200px;
+    height: 500px;
+}
+
+.linker-widget .dwl-pointer {
+	cursor:pointer
+}
+
+.linker-widget .dwl-highlight-card {
+	border:1px solid tomato
+}
+
+.linker-widget .dwl-card {
+	min-width: 120px;
+    max-width: 240px;
+	padding: 10px;
+	padding-right: 30px;
+}
+
+.linker-widget .dwl-middle {
+	top: 50%;
+	transform: translate(0, -50%);
+}
+
+.linker-widget .dwl-selected {
+	stroke: tomato !important;
+	color: tomato !important;
+}
+
+.linker-widget .dwl-thick path {
+	stroke-width: 3px;
+}
+
+.linker-widget #svg-content > svg {
+	width:100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.linker-widget #svg-content > svg rect,
+.linker-widget #svg-content > svg circle,
+.linker-widget #svg-content > svg ellipse,
+.linker-widget #svg-content > svg polygon {
+	pointer-events:fill;
+}
+
+.linker-widget .warning-icon {
+    font-size: 1.1em;
+    color: tomato;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translate(0,-50%);
+}
+
+.linker-widget .hide-warning i.warning-icon {
+	display:none;
+}
+
+.linker-widget button {
+	width:120px;
+}
