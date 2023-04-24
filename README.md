@@ -2,7 +2,7 @@
 
 SETUP:
 
-Use Windows IIS Manager to host [4thYrProjectWebsite folder](/src/main/resources/4thYrProjectWebsite) as a website and initialize a .json MIME type, /application/json.
+Use Windows IIS Manager to host [4thYrProjectWebsite folder](/src/main/resources/4thYrProjectWebsite) as a website and [one time setup] initialize a .json MIME type, /application/json.
 
 Change line 41 of [JavaWebSocketServer.java](/src/main/java/JavaWebSocketServer.java) such that the folder path is correct with your system. 
 
